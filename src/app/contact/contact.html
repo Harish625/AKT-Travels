@@ -1,0 +1,271 @@
+<section class="plan-journey">
+  <div class="container">
+
+    <!-- Heading -->
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-7 col-md-9">
+        <span class="plan-journey__eyebrow">Contact</span>
+        <h2 class="plan-journey__heading">Plan Your Journey With Us</h2>
+        <p class="plan-journey__subtext">
+          Tell us about your trip and our travel team will get back to you shortly.
+        </p>
+      </div>
+    </div>
+
+    <!-- Contact info cards -->
+    <div class="row g-3 g-lg-4 mt-4">
+      <div class="col-6 col-lg-3" *ngFor="let info of contactInfo">
+        <a
+          class="contact-card"
+          [href]="info.href"
+          [target]="info.href.startsWith('http') ? '_blank' : null"
+          rel="noopener"
+        >
+          <span class="contact-card__icon"><i [class]="info.icon"></i></span>
+          <span class="contact-card__label">{{ info.label }}</span>
+          <span class="contact-card__value">{{ info.value }}</span>
+          <span class="contact-card__link" *ngIf="info.linkText">
+            {{ info.linkText }} <i class="bx bx-right-arrow-alt"></i>
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Enquiry form -->
+    <div class="row justify-content-center mt-4 mt-lg-5">
+      <div class="col-12 col-xl-10">
+        <div class="enquiry-card">
+          <div class="enquiry-card__header">
+            <span class="enquiry-card__header-icon"><i class="bx bx-paper-plane"></i></span>
+            <h3>Travel Enquiry</h3>
+          </div>
+
+          <form [formGroup]="enquiryForm" (ngSubmit)="onSubmit()" novalidate>
+
+            <!-- Customer details -->
+            <div class="form-section">
+              <h4 class="form-section__title">Customer Details</h4>
+
+              <div class="row g-3 g-lg-4">
+                <div class="col-md-6">
+                  <label class="form-label" for="fullName">Full Name <span class="req">*</span></label>
+                  <input
+                    id="fullName"
+                    type="text"
+                    class="form-control"
+                    formControlName="fullName"
+                    placeholder="Enter your full name"
+                    [class.is-invalid]="f['fullName'].invalid && f['fullName'].touched"
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="mobileNumber">Mobile Number <span class="req">*</span></label>
+                  <div class="input-group">
+                    <span class="input-group-text">+91</span>
+                    <input
+                      id="mobileNumber"
+                      type="tel"
+                      class="form-control"
+                      formControlName="mobileNumber"
+                      placeholder="Enter mobile number"
+                      [class.is-invalid]="f['mobileNumber'].invalid && f['mobileNumber'].touched"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="whatsappNumber">WhatsApp Number</label>
+                  <div class="input-group">
+                    <span class="input-group-text">+91</span>
+                    <input
+                      id="whatsappNumber"
+                      type="tel"
+                      class="form-control"
+                      formControlName="whatsappNumber"
+                      placeholder="WhatsApp number"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="emailAddress">Email Address</label>
+                  <input
+                    id="emailAddress"
+                    type="email"
+                    class="form-control"
+                    formControlName="emailAddress"
+                    placeholder="Enter email address"
+                    [class.is-invalid]="f['emailAddress'].invalid && f['emailAddress'].touched"
+                  />
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="address">Address <span class="req">*</span></label>
+                  <input
+                    id="address"
+                    type="text"
+                    class="form-control"
+                    formControlName="address"
+                    placeholder="Enter your address"
+                    [class.is-invalid]="f['address'].invalid && f['address'].touched"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Trip details -->
+            <div class="form-section">
+              <h4 class="form-section__title">Trip Details</h4>
+
+              <div class="row g-3 g-lg-4">
+                <div class="col-md-6">
+                  <label class="form-label" for="travelType">Travel Type <span class="req">*</span></label>
+                  <select
+                    id="travelType"
+                    class="form-select"
+                    formControlName="travelType"
+                    [class.is-invalid]="f['travelType'].invalid && f['travelType'].touched"
+                  >
+                    <option value="" disabled selected>Select travel type</option>
+                    <option *ngFor="let t of travelTypes" [value]="t.value">{{ t.label }}</option>
+                  </select>
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="pickupLocation">Pickup Location <span class="req">*</span></label>
+                  <input
+                    id="pickupLocation"
+                    type="text"
+                    class="form-control"
+                    formControlName="pickupLocation"
+                    placeholder="Enter pickup location"
+                    [class.is-invalid]="f['pickupLocation'].invalid && f['pickupLocation'].touched"
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="destination">Destination <span class="req">*</span></label>
+                  <input
+                    id="destination"
+                    type="text"
+                    class="form-control"
+                    formControlName="destination"
+                    placeholder="Enter destination"
+                    [class.is-invalid]="f['destination'].invalid && f['destination'].touched"
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="travelDate">Travel Date <span class="req">*</span></label>
+                  <input
+                    id="travelDate"
+                    type="date"
+                    class="form-control"
+                    formControlName="travelDate"
+                    [class.is-invalid]="f['travelDate'].invalid && f['travelDate'].touched"
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="returnDate">Return Date</label>
+                  <input
+                    id="returnDate"
+                    type="date"
+                    class="form-control"
+                    formControlName="returnDate"
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label class="form-label" for="passengers">Number of Passengers <span class="req">*</span></label>
+                  <select
+                    id="passengers"
+                    class="form-select"
+                    formControlName="passengers"
+                    [class.is-invalid]="f['passengers'].invalid && f['passengers'].touched"
+                  >
+                    <option value="" disabled selected>Select passengers</option>
+                    <option *ngFor="let p of passengerOptions" [value]="p.value">{{ p.label }}</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label">Vehicle Preference</label>
+                  <div class="chip-group">
+                    <button
+                      type="button"
+                      class="chip"
+                      *ngFor="let veh of vehicleOptions"
+                      [class.chip--active]="f['vehiclePreference'].value === veh.value"
+                      (click)="selectVehicle(veh.value)"
+                    >
+                      {{ veh.label }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Additional requirements -->
+            <div class="form-section">
+              <h4 class="form-section__title">Additional Requirements</h4>
+
+              <div class="row g-3 g-lg-4">
+                <div class="col-md-5">
+                  <label class="form-label" for="pickupTime">Pickup Time</label>
+                  <input
+                    id="pickupTime"
+                    type="time"
+                    class="form-control"
+                    formControlName="pickupTime"
+                  />
+                </div>
+
+                <div class="col-md-7">
+                  <label class="form-label" for="message">Message / Special Requirements</label>
+                  <textarea
+                    id="message"
+                    class="form-control"
+                    rows="1"
+                    formControlName="message"
+                    placeholder="Tell us about your trip"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn-whatsapp">
+                <i class="bx bxl-whatsapp"></i>
+                Send Enquiry on WhatsApp
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom CTA band -->
+  <div class="help-band">
+    <div class="container">
+      <div class="help-band__inner">
+        <div class="help-band__text">
+          <h4>Need Help Planning Your Trip?</h4>
+          <p>Talk to our travel team today.</p>
+        </div>
+        <div class="help-band__actions">
+          <a [href]="'tel:' + callNumber" class="btn-outline-light">
+            <i class="bx bx-phone-call"></i> Call Now
+          </a>
+          <a [href]="'https://wa.me/' + whatsappNumber" target="_blank" rel="noopener" class="btn-solid-accent">
+            <i class="bx bxl-whatsapp"></i> WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

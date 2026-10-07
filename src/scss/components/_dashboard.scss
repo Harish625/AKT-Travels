@@ -1,0 +1,252 @@
+.admin-shell .stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.admin-shell .ticket {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 58px;
+  min-height: 138px;
+  overflow: hidden;
+  border: 1px solid var(--admin-line-soft);
+  border-radius: var(--admin-radius);
+  background: var(--admin-paper);
+  box-shadow: var(--admin-shadow-soft);
+}
+
+.admin-shell .ticket-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  min-width: 0;
+  padding: 1.1rem;
+}
+
+.admin-shell .ticket-value {
+  color: var(--admin-ink);
+  font-size: clamp(1.65rem, 3vw, 2.15rem);
+  font-weight: 850;
+  line-height: 1;
+}
+
+.admin-shell .ticket-sub {
+  color: var(--admin-muted);
+  font-size: 0.78rem;
+}
+
+.admin-shell .ticket-stub {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px dashed var(--admin-line);
+  background: #f8fafc;
+  color: var(--admin-muted);
+}
+
+.admin-shell .ticket-stub::before,
+.admin-shell .ticket-stub::after {
+  content: '';
+  position: absolute;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--admin-canvas);
+}
+
+.admin-shell .ticket-stub::before {
+  top: -8px;
+}
+
+.admin-shell .ticket-stub::after {
+  bottom: -8px;
+}
+
+.admin-shell .stub-teal {
+  background: #ecfeff;
+  color: #0e7490;
+}
+
+.admin-shell .stub-gold {
+  background: #fffbeb;
+  color: #a16207;
+}
+
+.admin-shell .stub-coral {
+  background: #fff1f2;
+  color: #be123c;
+}
+
+.admin-shell .dash-lower {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.85fr);
+  gap: 1.25rem;
+}
+
+.admin-shell .recent-card,
+.admin-shell .quick-card {
+  padding: 1.15rem;
+}
+
+.admin-shell .card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.admin-shell .card-head h3,
+.admin-shell .quick-card h3 {
+  margin: 0;
+  color: var(--admin-ink);
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.admin-shell .link-more {
+  color: var(--admin-sky);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.admin-shell .recent-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.admin-shell .recent-list li {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 70px;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--admin-line-soft);
+}
+
+.admin-shell .recent-list li:last-child {
+  border-bottom: 0;
+}
+
+.admin-shell .recent-list img {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--admin-radius);
+  object-fit: cover;
+}
+
+.admin-shell .recent-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.admin-shell .recent-meta strong {
+  overflow: hidden;
+  color: var(--admin-ink);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-shell .recent-meta span,
+.admin-shell .empty-row {
+  color: var(--admin-muted);
+  font-size: 0.78rem;
+}
+
+.admin-shell .quick-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admin-shell .quick-link {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: center;
+  gap: 0.8rem;
+  min-height: 68px;
+  padding: 0.75rem;
+  border: 1px solid var(--admin-line-soft);
+  border-radius: var(--admin-radius);
+  color: var(--admin-ink);
+  transition:
+    background 0.18s var(--admin-ease),
+    border-color 0.18s var(--admin-ease);
+}
+
+.admin-shell .quick-link:hover {
+  border-color: rgba(14, 165, 233, 0.4);
+  background: #f0f9ff;
+}
+
+.admin-shell .quick-link strong {
+  display: block;
+  overflow: hidden;
+  color: var(--admin-ink);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-shell .quick-link span {
+  display: block;
+  overflow: hidden;
+  color: var(--admin-muted);
+  font-size: 0.76rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-shell .quick-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--admin-radius);
+  background: #eef6ff;
+  color: var(--admin-sky);
+  font-size: 1.1rem;
+  font-weight: 850;
+}
+
+@media (max-width: 1180px) {
+  .admin-shell .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .admin-shell .dash-lower {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-shell .stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-shell .recent-list li {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .admin-shell .recent-list .badge,
+  .admin-shell .recent-list .btn {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

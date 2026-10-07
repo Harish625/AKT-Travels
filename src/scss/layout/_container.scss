@@ -1,0 +1,32 @@
+// =========================================================
+// LAYOUT / CONTAINER + SECTION
+// Use these on every page so max-width & spacing stay identical
+// =========================================================
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.container {
+  @include m.container;
+}
+
+// Narrower container for text-heavy content (blog post, forms)
+.container-narrow {
+  @include m.container;
+  max-width: 800px;
+}
+
+// Standard section wrapper - consistent vertical rhythm site-wide
+.section {
+  @include m.section-spacing;
+
+  &--alt {
+    background: v.$color-bg-alt;
+  }
+
+  &__header {
+    text-align: center;
+    max-width: 640px;
+    margin-inline: auto;
+    margin-bottom: v.$space-7;
+  }
+}

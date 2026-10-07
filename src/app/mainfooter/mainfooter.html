@@ -1,0 +1,111 @@
+<footer class="main-footer" aria-label="Site footer">
+
+  <!-- Background photo + dark overlay -->
+  <div class="main-footer__bg" aria-hidden="true"></div>
+  <div class="main-footer__scrim" aria-hidden="true"></div>
+
+  <!-- Signature: animated route line, echoes the About section's route motif -->
+  <svg class="main-footer__route" viewBox="0 0 1200 32" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="footerRouteGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#f97316" />
+        <stop offset="100%" stop-color="#f2c078" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M0 16 Q 150 -4 300 16 T 600 16 T 900 16 T 1200 16"
+      fill="none"
+      stroke="url(#footerRouteGradient)"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-dasharray="9 9"
+      class="main-footer__route-path"
+    />
+  </svg>
+
+  <div class="main-footer__container">
+    <div class="main-footer__grid">
+
+      <!-- Brand column -->
+      <div class="main-footer__col main-footer__col--brand">
+        <h3 class="main-footer__brand">AKT <span>Travels</span></h3>
+
+        <p class="main-footer__about">
+          AKT Travels — Coimbatore's trusted partner for SUV rental, tempo traveller hire,
+          Force Urbania booking, and 20 to 56 seater bus rental. 24/7 service for weddings,
+          corporate events, pilgrimages &amp; outstation trips.
+        </p>
+
+        <ul class="main-footer__social" aria-label="Follow AKT Travels on social media">
+          <li *ngFor="let social of socialLinks">
+            <a
+              [href]="social.url"
+              [attr.aria-label]="social.label"
+              target="_blank"
+              rel="noopener"
+              class="main-footer__social-link"
+            >
+              <i class="bi" [ngClass]="social.icon" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Quick Links column -->
+      <div class="main-footer__col">
+        <h4 class="main-footer__heading">
+          <span class="main-footer__pin" aria-hidden="true"></span>
+          Quick Links
+        </h4>
+        <ul class="main-footer__links">
+          <li *ngFor="let link of quickLinks">
+            <a [href]="link.url" class="main-footer__link">{{ link.label }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Popular Destinations column -->
+      <div class="main-footer__col">
+        <h4 class="main-footer__heading">
+          <span class="main-footer__pin" aria-hidden="true"></span>
+          Popular Destinations
+        </h4>
+        <ul class="main-footer__links main-footer__links--twocol">
+          <li *ngFor="let dest of destinations">
+            <a [href]="dest.url" class="main-footer__link">{{ dest.label }}</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Quick Contact column -->
+      <div class="main-footer__col">
+        <h4 class="main-footer__heading">
+          <span class="main-footer__pin" aria-hidden="true"></span>
+          Quick Contact
+        </h4>
+        <ul class="main-footer__contact">
+          <li>
+            <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+            <span>65 Cheran Nagar, Periyakuli Privu, Chettipalayam, Coimbatore, Tamil Nadu 641201</span>
+          </li>
+          <li>
+            <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+            <a href="tel:+918508088851">+91 85080 88851</a>
+          </li>
+          <li>
+            <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+            <a href="mailto:pgp23101999@gmail.com">pgp23101999&#64;gmail.com</a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="main-footer__bottom">
+      <p class="main-footer__copyright">
+        Copyright &copy; {{ currentYear }} AKT Travels — Coimbatore. All Rights Reserved.
+      </p>
+      <p class="main-footer__note">Developed By -- Mobifish Privated Limited</p>
+    </div>
+  </div>
+</footer>

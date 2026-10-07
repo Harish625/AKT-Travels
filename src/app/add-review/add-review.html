@@ -1,0 +1,100 @@
+<div class="form-page">
+  <div class="form-shell">
+    <div class="accent-bar"></div>
+
+    <header class="form-header">
+      <div class="brand-row">
+        <div class="brand-icon">AKT</div>
+        <span class="brand-name">AKT Travels</span>
+      </div>
+      <h1>Share Your Travel Experience</h1>
+      <p class="form-subtitle">Your feedback helps fellow travellers choose their journey with confidence.</p>
+    </header>
+
+    @if (!isSubmitted) {
+      <form class="review-form" [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+
+        <div class="field-block" [class.invalid]="f['name'].invalid && f['name'].touched">
+          <label for="name">Your Name <span class="required">*</span></label>
+          <input id="name" type="text" formControlName="name" placeholder="e.g. Arun K." autocomplete="name" />
+          @if (f['name'].invalid && f['name'].touched) {
+            <span class="error-msg">Please enter your name (2–50 characters)</span>
+          }
+        </div>
+
+        <div class="field-block" [class.invalid]="f['location'].invalid && f['location'].touched">
+          <label for="location">Trip Location <span class="required">*</span></label>
+          <input id="location" type="text" formControlName="location" placeholder="e.g. Ooty to Coimbatore" />
+          @if (f['location'].invalid && f['location'].touched) {
+            <span class="error-msg">Please tell us where your trip was</span>
+          }
+        </div>
+
+        <div class="field-block" [class.invalid]="f['serviceUsed'].invalid && f['serviceUsed'].touched">
+          <label for="serviceUsed">Service Used <span class="required">*</span></label>
+          <select id="serviceUsed" formControlName="serviceUsed">
+            <option value="" disabled selected>Select a service</option>
+            @for (opt of serviceOptions; track opt) {
+              <option [value]="opt">{{ opt }}</option>
+            }
+          </select>
+          @if (f['serviceUsed'].invalid && f['serviceUsed'].touched) {
+            <span class="error-msg">Please select the service you used</span>
+          }
+        </div>
+
+        <div class="field-block" [class.invalid]="f['rating'].invalid && f['rating'].touched">
+          <label>Your Rating <span class="required">*</span></label>
+          <div class="star-rating" (mouseleave)="clearHoverRating()">
+            @for (star of [1,2,3,4,5]; track star) {
+              <button type="button" class="star-btn" (click)="setRating(star)" (mouseenter)="setHoverRating(star)"
+                      [attr.aria-label]="'Rate ' + star + ' stars'">
+                <svg width="30" height="30" viewBox="0 0 24 24"
+                     [attr.fill]="star <= (hoverRating || f['rating'].value) ? '#ff8a3d' : 'none'"
+                     [attr.stroke]="star <= (hoverRating || f['rating'].value) ? '#ff8a3d' : '#c7cbd4'">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke-width="1.4" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            }
+          </div>
+          @if (f['rating'].invalid && f['rating'].touched) {
+            <span class="error-msg">Please select a star rating</span>
+          }
+        </div>
+
+        <div class="field-block" [class.invalid]="f['reviewText'].invalid && f['reviewText'].touched">
+          <label for="reviewText">Your Review <span class="required">*</span></label>
+          <textarea id="reviewText" formControlName="reviewText" rows="5"
+                    placeholder="Tell us about your journey, the driver, the vehicle, anything that stood out..."></textarea>
+          <div class="char-counter" [class.warn]="charCount > 400">{{ charCount }} / 400</div>
+          @if (f['reviewText'].invalid && f['reviewText'].touched) {
+            <span class="error-msg">Please write at least 20 characters</span>
+          }
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" routerLink="/">Cancel</button>
+          <button type="submit" class="btn-primary" [disabled]="isSubmitting">
+            @if (isSubmitting) {
+              <span class="spinner"></span> Submitting...
+            } @else {
+              Submit Review
+            }
+          </button>
+        </div>
+      </form>
+    } @else {
+      <div class="success-state">
+        <div class="success-check">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="11" stroke="#ff8a3d" stroke-width="1.5"/>
+            <path d="M7 12.5l3 3 7-7" stroke="#ff8a3d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>Thank You!</h2>
+        <p>Your review has been added and will appear on our homepage.</p>
+        <p class="redirect-note">Redirecting you back to the homepage...</p>
+      </div>
+    }
+  </div>
+</div>

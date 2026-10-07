@@ -1,0 +1,103 @@
+<section class="tour-hero-section">
+  <div class="tour-hero-section__container">
+
+    <div class="tour-hero-card">
+      <div class="tour-hero-card__image-wrap">
+        <img
+          class="tour-hero-card__image"
+          [src]="heroImage"
+          alt="Tour package destination"
+          loading="eager"
+        />
+        <div class="tour-hero-card__overlay"></div>
+      </div>
+
+      <div class="tour-hero-card__content">
+        <span class="tour-hero-card__tag">{{ tag }}</span>
+
+        <h1 class="tour-hero-card__title">{{ title }}</h1>
+
+        <p class="tour-hero-card__description">{{ description }}</p>
+
+        <div class="tour-hero-card__meta">
+          <span class="tour-hero-card__meta-item">
+            <i class="bi bi-calendar3" aria-hidden="true"></i>
+            {{ duration }}
+          </span>
+          <span class="tour-hero-card__meta-item">
+            <i class="bi bi-tag-fill" aria-hidden="true"></i>
+            {{ price }}
+          </span>
+        </div>
+
+        <button type="button" class="tour-hero-card__cta" (click)="enquireAboutTour()">
+          <i class="bi bi-whatsapp" aria-hidden="true"></i>
+          Enquire About This Tour
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="destinations-section">
+  <div class="destinations-section__container">
+
+    <div class="destinations-section__header">
+      <span class="destinations-section__eyebrow">Popular Destinations Covered</span>
+      <h2 class="destinations-section__title">Top Travel Destinations</h2>
+    </div>
+
+    <div class="destinations-tabs" role="tablist">
+      @for (category of categories; track category.id) {
+        <button
+          type="button"
+          role="tab"
+          class="destinations-tabs__tab"
+          [class.is-active]="activeCategory() === category.id"
+          [attr.aria-selected]="activeCategory() === category.id"
+          (click)="setCategory(category.id)"
+        >
+          {{ category.label }}
+        </button>
+      }
+    </div>
+
+    <div class="destinations-grid">
+      @for (destination of filteredDestinations(); track destination.id) {
+        <article class="destination-card">
+          <div class="destination-card__image-wrap">
+            <img
+              class="destination-card__image"
+              [src]="destination.image"
+              [alt]="destination.title"
+              loading="lazy"
+            />
+            <span class="destination-card__badge">{{ destination.badge }}</span>
+          </div>
+
+          <div class="destination-card__body">
+            <h3 class="destination-card__title">{{ destination.title }}</h3>
+            <span class="destination-card__location">{{ destination.location }}</span>
+            <p class="destination-card__description">{{ destination.description }}</p>
+          </div>
+
+          <div class="destination-card__footer">
+            <span class="destination-card__vehicle">{{ destination.vehicle }}</span>
+            <button type="button" class="destination-card__link" (click)="viewPackage(destination)">
+              View Package
+              <i class="bi bi-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+
+    @if (filteredDestinations().length === 0) {
+      <p class="destinations-empty">No destinations found in this category yet.</p>
+    }
+
+  </div>
+</section>

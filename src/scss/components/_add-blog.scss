@@ -1,0 +1,138 @@
+.admin-shell .form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
+  align-items: start;
+  gap: 1.25rem;
+}
+
+.admin-shell .form-main,
+.admin-shell .form-side .card {
+  padding: 1.15rem;
+}
+
+.admin-shell .form-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-shell .form-side {
+  position: sticky;
+  top: calc(var(--admin-topbar-h) + 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.admin-shell .side-title {
+  margin: 0 0 0.9rem;
+  color: var(--admin-ink);
+  font-size: 1rem;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
+.admin-shell .field-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 0.8rem;
+}
+
+.admin-shell .form-side .card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.admin-shell .checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 42px;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid var(--admin-line-soft);
+  border-radius: var(--admin-radius);
+  background: #f8fafc;
+  cursor: pointer;
+}
+
+.admin-shell .checkbox-row input {
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  accent-color: var(--admin-amber);
+  flex-shrink: 0;
+}
+
+.admin-shell .preview-card {
+  overflow: hidden;
+}
+
+.admin-shell .postcard {
+  overflow: hidden;
+  border: 1px solid var(--admin-line-soft);
+  border-radius: var(--admin-radius);
+  background: #ffffff;
+}
+
+.admin-shell .postcard img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #e5e7eb;
+}
+
+.admin-shell .postcard-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.95rem;
+}
+
+.admin-shell .postcard h4 {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: var(--admin-ink);
+  font-size: 1rem;
+  font-weight: 850;
+  letter-spacing: 0;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.admin-shell .postcard p {
+  display: -webkit-box;
+  overflow: hidden;
+  min-height: 3.1em;
+  margin: 0;
+  color: var(--admin-muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.admin-shell .postcard-meta {
+  color: var(--admin-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+@media (max-width: 1120px) {
+  .admin-shell .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-shell .form-side {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-shell .field-row {
+    grid-template-columns: 1fr;
+  }
+}

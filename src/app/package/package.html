@@ -1,0 +1,154 @@
+<ng-container *ngIf="package; else notFoundState">
+
+  <!-- Hero -->
+  <section class="pkg-hero">
+    <img
+      class="pkg-hero__image"
+      [src]="package.heroImage"
+      [alt]="package.name"
+    />
+    <div class="pkg-hero__scrim"></div>
+
+    <div class="pkg-hero__content">
+      <button class="pkg-hero__back" type="button" (click)="backToPackages()">
+        ← All packages
+      </button>
+
+      <span class="pkg-badge" *ngIf="package.badge">{{ package.badge }}</span>
+      <h1 class="pkg-hero__title">{{ package.name }}</h1>
+      <p class="pkg-hero__place">{{ package.place }}</p>
+    </div>
+  </section>
+
+  <!-- Body -->
+  <div class="pkg-layout">
+    <main class="pkg-main">
+
+      <!-- Quick facts -->
+      <section class="pkg-facts">
+        <div class="pkg-facts__item">
+          <span class="pkg-facts__label">Duration</span>
+          <span class="pkg-facts__value">{{ package.duration }}</span>
+        </div>
+        <div class="pkg-facts__item">
+          <span class="pkg-facts__label">Group size</span>
+          <span class="pkg-facts__value">{{ package.groupSize }}</span>
+        </div>
+        <div class="pkg-facts__item">
+          <span class="pkg-facts__label">Best time</span>
+          <span class="pkg-facts__value">{{ package.bestTime }}</span>
+        </div>
+        <div class="pkg-facts__item">
+          <span class="pkg-facts__label">Transport</span>
+          <span class="pkg-facts__value">{{ package.transport }}</span>
+        </div>
+      </section>
+
+      <!-- Overview -->
+      <section class="pkg-section">
+        <h2 class="pkg-section__title">Overview</h2>
+        <p class="pkg-text pkg-text--justify">{{ package.tagline }}</p>
+        <p class="pkg-text pkg-text--justify">{{ package.overview }}</p>
+      </section>
+
+      <!-- Highlights -->
+      <section class="pkg-section" *ngIf="package.highlights?.length">
+        <h2 class="pkg-section__title">Highlights</h2>
+        <ul class="pkg-highlights">
+          <li class="pkg-highlights__item" *ngFor="let item of package.highlights">
+            {{ item }}
+          </li>
+        </ul>
+      </section>
+
+      <!-- Itinerary -->
+      <section class="pkg-section" *ngIf="package.itinerary?.length">
+        <h2 class="pkg-section__title">Itinerary</h2>
+
+        <ol class="pkg-itinerary">
+          <li class="pkg-itinerary__day" *ngFor="let stop of package.itinerary">
+            <div class="pkg-itinerary__marker">{{ stop.day }}</div>
+            <div class="pkg-itinerary__body">
+              <h3 class="pkg-itinerary__title">
+                Day {{ stop.day }} — {{ stop.title }}
+              </h3>
+              <p class="pkg-text pkg-text--justify">{{ stop.description }}</p>
+              <p class="pkg-itinerary__meals" *ngIf="stop.meals">
+                Meals: {{ stop.meals }}
+              </p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Inclusions / Exclusions -->
+      <section class="pkg-section">
+        <h2 class="pkg-section__title">What's included</h2>
+        <div class="pkg-terms">
+          <ul class="pkg-terms__list pkg-terms__list--include">
+            <li *ngFor="let item of package.inclusions">{{ item }}</li>
+          </ul>
+          <ul class="pkg-terms__list pkg-terms__list--exclude">
+            <li *ngFor="let item of package.exclusions">{{ item }}</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Policy -->
+      <section class="pkg-section">
+        <h2 class="pkg-section__title">Good to know</h2>
+        <p class="pkg-text pkg-text--justify">
+          Bookings are confirmed on receipt of advance payment. Cancellations made
+          72 hours or more before departure are refunded in full, minus a
+          nominal processing fee; cancellations within 72 hours are non-refundable.
+          Itinerary timings may shift slightly for weather, temple festival days,
+          or road conditions — your driver and our team will keep you informed
+          throughout the trip.
+        </p>
+      </section>
+    </main>
+
+    <!-- Booking sidebar -->
+    <aside class="pkg-sidebar">
+      <div class="pkg-sidebar__card">
+        <p class="pkg-sidebar__price-label">Starting from</p>
+        <p class="pkg-sidebar__price">
+          ₹{{ formatPrice(package.priceFrom) }}
+          <span class="pkg-sidebar__price-unit">/ {{ package.priceUnit }}</span>
+        </p>
+
+        <dl class="pkg-sidebar__meta">
+          <div>
+            <dt>Duration</dt>
+            <dd>{{ package.duration }}</dd>
+          </div>
+          <div>
+            <dt>Transport</dt>
+            <dd>{{ package.transport }}</dd>
+          </div>
+        </dl>
+
+        <button class="pkg-sidebar__cta" type="button" (click)="goToEnquiry()">
+          Enquire about this package
+        </button>
+        <p class="pkg-sidebar__note">
+          No payment required to enquire — our team will confirm availability
+          and share a final quote.
+        </p>
+      </div>
+    </aside>
+  </div>
+</ng-container>
+
+<ng-template #notFoundState>
+  <section class="pkg-empty">
+    <h1 class="pkg-empty__title">We couldn't find that package</h1>
+    <p class="pkg-text">
+      It may have been renamed or removed. Take a look at the full list of
+      tour packages instead.
+    </p>
+    <button class="pkg-sidebar__cta" type="button" (click)="backToPackages()">
+      Browse all packages
+    </button>
+  </section>
+</ng-template>

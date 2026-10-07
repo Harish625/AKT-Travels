@@ -1,0 +1,374 @@
+@use '../abstracts/variables' as v;
+
+:host {
+  display: block;
+}
+
+.admin-shell {
+  --admin-sidebar-w: 280px;
+  --admin-topbar-h: 72px;
+  --admin-footer-h: 52px;
+  --admin-paper: #ffffff;
+  --admin-canvas: #f6f8fb;
+  --admin-ink: #172033;
+  --admin-muted: #667085;
+  --admin-line: #dfe5ee;
+  --admin-line-soft: #ecf0f5;
+  --admin-amber: #{v.$color-primary};
+  --admin-amber-dark: #{v.$color-primary-dark};
+  --admin-amber-soft: rgba(245, 158, 11, 0.1);
+  --admin-sky: #{v.$color-secondary};
+  --admin-green: #16a34a;
+  --admin-red: #dc2626;
+  --admin-shadow: 0 14px 36px rgba(17, 24, 39, 0.08);
+  --admin-shadow-soft: 0 8px 22px rgba(17, 24, 39, 0.06);
+  --admin-radius: 8px;
+  --admin-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  position: relative;
+  min-height: 100vh;
+  background: var(--admin-canvas);
+  color: var(--admin-ink);
+  font-family: v.$font-body;
+}
+
+.admin-shell ::ng-deep a {
+  text-decoration: none;
+}
+
+/* Sidebar is position:fixed (see sidebar.scss), so main-col is simply
+   offset by its width and never needs to know about scroll position. */
+.main-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-left: var(--admin-sidebar-w, 280px);
+  transition: margin-left 0.24s var(--admin-ease);
+}
+
+/* Topbar and footer are both position:fixed too (see their own scss),
+   so page-area reserves matching top/bottom padding to avoid content
+   sliding underneath them. */
+.page-area {
+  flex: 1;
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  padding: calc(var(--admin-topbar-h, 72px) + clamp(1rem, 2.6vw, 2rem)) clamp(1rem, 2.6vw, 2rem)
+    calc(var(--admin-footer-h, 52px) + clamp(1rem, 2.6vw, 2rem));
+}
+
+@media (max-width: 1100px) {
+  .admin-shell {
+    --admin-sidebar-w: 250px;
+  }
+}
+
+@media (max-width: 860px) {
+  .main-col {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .admin-shell {
+    --admin-topbar-h: 72px;
+    --admin-footer-h: 60px;
+  }
+
+  .page-area {
+    padding-inline: 1rem;
+  }
+}
+
+/* -------------------------------------------------------------------- */
+/* Shared building blocks reused by dashboard / blog pages via ::ng-deep */
+/* -------------------------------------------------------------------- */
+
+.admin-shell ::ng-deep .animate-in {
+  animation: adminFadeUp 0.28s var(--admin-ease) both;
+}
+
+.admin-shell ::ng-deep .eyebrow {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--admin-amber-dark);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.admin-shell ::ng-deep .page-head,
+.admin-shell ::ng-deep .dash-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.admin-shell ::ng-deep .page-head h1,
+.admin-shell ::ng-deep .dash-head h1 {
+  margin: 0.15rem 0 0.25rem;
+  color: var(--admin-ink);
+  font-size: clamp(1.45rem, 2.1vw, 2rem);
+  font-weight: 800;
+}
+
+.admin-shell ::ng-deep .page-head p,
+.admin-shell ::ng-deep .dash-head p {
+  margin: 0;
+  color: var(--admin-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.admin-shell ::ng-deep .head-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.admin-shell ::ng-deep .card {
+  padding: 1.25rem;
+  border: 1px solid var(--admin-line-soft);
+  border-radius: var(--admin-radius);
+  background: var(--admin-paper);
+  box-shadow: var(--admin-shadow-soft);
+}
+
+.admin-shell ::ng-deep .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 40px;
+  padding: 0.62rem 0.95rem;
+  border: 1px solid transparent;
+  border-radius: var(--admin-radius);
+  font-size: 0.88rem;
+  font-weight: 750;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.18s var(--admin-ease), border-color 0.18s var(--admin-ease), color 0.18s var(--admin-ease), transform 0.18s var(--admin-ease);
+}
+
+.admin-shell ::ng-deep .btn:hover {
+  transform: translateY(-1px);
+}
+
+.admin-shell ::ng-deep .btn-gold {
+  background: var(--admin-amber);
+  border-color: var(--admin-amber);
+  color: #111827;
+}
+
+.admin-shell ::ng-deep .btn-gold:hover {
+  background: var(--admin-amber-dark);
+  border-color: var(--admin-amber-dark);
+  color: #ffffff;
+}
+
+.admin-shell ::ng-deep .btn-ghost {
+  background: var(--admin-paper);
+  border-color: var(--admin-line);
+  color: var(--admin-ink);
+}
+
+.admin-shell ::ng-deep .btn-ghost:hover {
+  border-color: rgba(14, 165, 233, 0.45);
+  color: var(--admin-sky);
+}
+
+.admin-shell ::ng-deep .btn-danger {
+  background: #fff1f2;
+  border-color: #fecdd3;
+  color: var(--admin-red);
+}
+
+.admin-shell ::ng-deep .btn-danger:hover {
+  background: var(--admin-red);
+  border-color: var(--admin-red);
+  color: #ffffff;
+}
+
+.admin-shell ::ng-deep .btn-sm {
+  min-height: 34px;
+  padding: 0.48rem 0.7rem;
+  font-size: 0.8rem;
+}
+
+.admin-shell ::ng-deep .badge,
+.admin-shell ::ng-deep .chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 26px;
+  padding: 0.24rem 0.62rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: capitalize;
+  white-space: nowrap;
+  border: 0;
+}
+
+.admin-shell ::ng-deep .chip {
+  background: #eef6ff;
+  color: #0369a1;
+}
+
+.admin-shell ::ng-deep .badge-published {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.admin-shell ::ng-deep .badge-draft {
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.admin-shell ::ng-deep .table-wrap {
+  overflow: auto;
+  border: 1px solid var(--admin-line-soft);
+  border-radius: var(--admin-radius);
+  background: var(--admin-paper);
+  box-shadow: var(--admin-shadow-soft);
+}
+
+.admin-shell ::ng-deep .data-table {
+  width: 100%;
+  min-width: 920px;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.admin-shell ::ng-deep .data-table th,
+.admin-shell ::ng-deep .data-table td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--admin-line-soft);
+  color: var(--admin-ink);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.admin-shell ::ng-deep .data-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #f8fafc;
+  color: var(--admin-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.admin-shell ::ng-deep .data-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.admin-shell ::ng-deep .data-table tbody tr:hover td {
+  background: #fbfdff;
+}
+
+.admin-shell ::ng-deep .field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+}
+
+.admin-shell ::ng-deep .field label,
+.admin-shell ::ng-deep .checkbox-row {
+  margin: 0;
+  color: var(--admin-ink);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.admin-shell ::ng-deep .field input,
+.admin-shell ::ng-deep .field textarea,
+.admin-shell ::ng-deep .field select,
+.admin-shell ::ng-deep .filter-bar select,
+.admin-shell ::ng-deep .search-box {
+  border: 1px solid var(--admin-line);
+  border-radius: var(--admin-radius);
+  background: #ffffff;
+  color: var(--admin-ink);
+  font-size: 0.9rem;
+}
+
+.admin-shell ::ng-deep .field input,
+.admin-shell ::ng-deep .field textarea,
+.admin-shell ::ng-deep .field select,
+.admin-shell ::ng-deep .filter-bar select {
+  padding: 0.72rem 0.82rem;
+}
+
+.admin-shell ::ng-deep .field textarea {
+  resize: vertical;
+}
+
+.admin-shell ::ng-deep .field input:focus,
+.admin-shell ::ng-deep .field textarea:focus,
+.admin-shell ::ng-deep .field select:focus,
+.admin-shell ::ng-deep .filter-bar select:focus,
+.admin-shell ::ng-deep .search-box:focus-within {
+  border-color: rgba(14, 165, 233, 0.72);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12);
+  outline: 0;
+}
+
+.admin-shell ::ng-deep .hint {
+  color: var(--admin-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.admin-shell ::ng-deep .toast {
+  position: fixed;
+  right: 1.25rem;
+  bottom: calc(var(--admin-footer-h) + 1.25rem);
+  z-index: 100;
+  max-width: min(360px, calc(100vw - 2rem));
+  padding: 0.8rem 0.95rem;
+  border: 1px solid rgba(22, 163, 74, 0.26);
+  border-radius: var(--admin-radius);
+  background: #f0fdf4;
+  color: #166534;
+  box-shadow: var(--admin-shadow);
+  font-weight: 750;
+}
+
+@keyframes adminFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 860px) {
+  .admin-shell ::ng-deep .page-head,
+  .admin-shell ::ng-deep .dash-head {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-shell ::ng-deep .head-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 560px) {
+  .admin-shell ::ng-deep .head-actions,
+  .admin-shell ::ng-deep .head-actions .btn {
+    width: 100%;
+  }
+}

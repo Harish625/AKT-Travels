@@ -1,0 +1,95 @@
+<div class="blog-form animate-in">
+  <div class="page-head">
+    <div>
+      <span class="eyebrow">Blog Management</span>
+      <h1>{{ mode === 'add' ? 'Add Blog' : 'Edit Blog' }}</h1>
+      <p>{{ mode === 'add' ? 'Write a new story for the AKT Travels journal.' : 'Update this story. Changes reflect live once published.' }}</p>
+    </div>
+    <div class="head-actions">
+      <a class="btn btn-ghost" (click)="cancel()">Cancel</a>
+      <button class="btn btn-ghost" type="button" (click)="saveAs('draft')">Save Draft</button>
+      <button class="btn btn-gold" type="button" (click)="saveAs('published')">Publish</button>
+    </div>
+  </div>
+
+  <form [formGroup]="form" class="form-grid">
+    <div class="card form-main">
+      <div class="field">
+        <label>Title</label>
+        <input type="text" formControlName="title" placeholder="e.g. Chasing Mist in the Nilgiri Hills" />
+        <span class="hint" *ngIf="f.title.invalid && f.title.touched">Title needs at least 4 characters.</span>
+      </div>
+
+      <div class="field">
+        <label>URL Slug</label>
+        <input type="text" formControlName="slug" placeholder="chasing-mist-nilgiri-hills" />
+        <span class="hint">akttravels.com/journal/{{ form.value.slug || '...' }}</span>
+      </div>
+
+      <div class="field">
+        <label>Excerpt</label>
+        <textarea formControlName="excerpt" rows="2" placeholder="One or two sentences that hook the reader..."></textarea>
+        <span class="hint">{{ (form.value.excerpt || '').length }}/160 - shown on the home page card</span>
+      </div>
+
+      <div class="field">
+        <label>Content</label>
+        <textarea formControlName="content" rows="12" placeholder="Write the full story here..."></textarea>
+      </div>
+    </div>
+
+    <div class="form-side">
+      <div class="card">
+        <h3 class="side-title">Publishing</h3>
+
+        <div class="field">
+          <label>Cover image URL</label>
+          <input type="text" formControlName="coverImage" placeholder="https://..." />
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Category</label>
+            <select formControlName="category">
+              <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Read time (min)</label>
+            <input type="number" formControlName="readTimeMinutes" min="1" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Author</label>
+          <input type="text" formControlName="author" />
+        </div>
+
+        <div class="field">
+          <label>Tags (comma separated)</label>
+          <input type="text" formControlName="tagsText" placeholder="Ooty, Hill Stations, Tea Estates" />
+        </div>
+
+        <label class="checkbox-row">
+          <input type="checkbox" formControlName="featured" />
+          <span>Feature on home page hero</span>
+        </label>
+      </div>
+
+      <div class="card preview-card">
+        <h3 class="side-title">Live preview</h3>
+        <article class="postcard">
+          <img [src]="coverPreview" alt="" />
+          <div class="postcard-body">
+            <span class="chip">{{ form.value.category }}</span>
+            <h4>{{ form.value.title || 'Your blog title' }}</h4>
+            <p>{{ form.value.excerpt || 'Your excerpt will appear here...' }}</p>
+            <span class="postcard-meta">{{ form.value.author }} - {{ form.value.readTimeMinutes }} min read</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </form>
+
+  <div class="toast" *ngIf="toastMessage">{{ toastMessage }}</div>
+</div>

@@ -1,0 +1,584 @@
+// =========================================================
+// COMPONENTS / NAVBAR
+// White premium navbar. Left: wordmark | Right: nav + CTA
+// =========================================================
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+app-navbar {
+  display: block;
+  min-height: 64px;
+
+  @include m.respond-to(md) {
+    min-height: 76px;
+  }
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+
+  width: 100%;
+  background: v.$color-white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-family: v.$font-heading;
+
+  &--scrolled {
+    position: fixed;
+    top: 0;
+    background: #ffffff;
+    box-shadow: 0 2px 16px rgba(15, 23, 42, 0.08);
+  }
+
+  &__inner {
+    @include m.container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: v.$space-4;
+    min-height: 64px;
+
+    @include m.respond-to(md) {
+      min-height: 76px;
+    }
+  }
+
+  // ---------- Brand / wordmark (left) ----------
+  &__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  &__brand-mark {
+    font-size: v.$font-size-lg;
+    font-weight: v.$font-weight-bold;
+    color: v.$color-primary;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  &__brand-name {
+    font-size: v.$font-size-lg;
+    font-weight: v.$font-weight-medium;
+    color: v.$color-text-dark;
+    letter-spacing: 0.01em;
+    line-height: 1;
+
+    @include m.respond-to(md) {
+      font-weight: 300;
+    }
+  }
+
+  // ---------- Desktop nav ----------
+  &__nav {
+    display: none;
+
+    @include m.respond-to(md) {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: v.$space-7;
+      height: 100%;
+    }
+  }
+
+  &__item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1;
+    color: v.$color-text-dark;
+    font-size: v.$font-size-sm;
+    font-weight: v.$font-weight-semibold;
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    padding-block: v.$space-2;
+    transition: color v.$transition-fast;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: v.$color-primary;
+      transform: translateX(-50%);
+      transition: width v.$transition-fast;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: v.$color-primary;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  // premium chevron icon (desktop trigger)
+  &__chevron {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    transition: transform v.$transition-fast;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+  }
+
+  &__item--dropdown:hover &__chevron,
+  &__item--dropdown:focus-within &__chevron {
+    transform: rotate(180deg);
+  }
+
+  // ---------- Dropdown (desktop) ----------
+  &__dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: v.$space-3;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity v.$transition-fast, visibility v.$transition-fast;
+    z-index: 10;
+  }
+
+  &__item--dropdown:hover &__dropdown,
+  &__item--dropdown:focus-within &__dropdown {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  &__dropdown-panel {
+    position: relative;
+    min-width: 250px;
+    background: v.$color-white;
+    border-radius: 14px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+    padding: v.$space-2;
+    transform: translateY(6px);
+    transition: transform v.$transition-fast;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 10px;
+      height: 10px;
+      background: v.$color-white;
+      border-radius: 2px;
+    }
+  }
+
+  &__item--dropdown:hover &__dropdown-panel,
+  &__item--dropdown:focus-within &__dropdown-panel {
+    transform: translateY(0);
+  }
+
+  &__dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: v.$space-3;
+    padding: v.$space-2 v.$space-3;
+    border-radius: 10px;
+    color: v.$color-text-dark;
+    font-size: v.$font-size-sm;
+    font-weight: v.$font-weight-medium;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background v.$transition-fast, color v.$transition-fast;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(v.$color-primary, 0.08);
+      color: v.$color-primary;
+    }
+  }
+
+  // icon badge — used in dropdown panel, desktop top-level items, and mobile drawer
+  &__item-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: rgba(v.$color-primary, 0.1);
+    color: v.$color-primary;
+    flex-shrink: 0;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // ---------- Right-side action group (CTA + Admin) ----------
+  &__actions {
+    display: none;
+
+    @include m.respond-to(md) {
+      display: inline-flex;
+      align-items: center;
+      gap: v.$space-3;
+      flex-shrink: 0;
+    }
+  }
+
+  // ---------- CTA button ----------
+  &__cta {
+    display: none;
+
+    @include m.respond-to(md) {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: v.$color-primary;
+      color: v.$color-white;
+      font-size: v.$font-size-sm;
+      font-weight: v.$font-weight-semibold;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      padding: v.$space-3 v.$space-6;
+      border-radius: v.$radius-full;
+      white-space: nowrap;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      transition: transform v.$transition-fast, box-shadow v.$transition-fast, opacity v.$transition-fast;
+
+      &:hover,
+      &:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 26px rgba(0, 0, 0, 0.16);
+        opacity: 0.94;
+      }
+    }
+  }
+
+  // ---------- Admin button (secondary, sits right of CTA) ----------
+  &__admin {
+    display: none;
+
+    @include m.respond-to(md) {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: transparent;
+      color: v.$color-primary;
+      font-size: v.$font-size-sm;
+      font-weight: v.$font-weight-semibold;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      padding: v.$space-3 v.$space-5;
+      border-radius: v.$radius-full;
+      border: 1.5px solid v.$color-primary;
+      white-space: nowrap;
+      transition: background v.$transition-fast, color v.$transition-fast, transform v.$transition-fast;
+
+      &:hover,
+      &:focus-visible {
+        background: v.$color-primary;
+        color: v.$color-white;
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  // ---------- Mobile toggle (hamburger <-> X) ----------
+  &__toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 110;
+    position: relative;
+
+    @include m.respond-to(md) {
+      display: none;
+    }
+  }
+
+  &__toggle-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: v.$color-text-dark;
+    transition: transform v.$transition-base, opacity v.$transition-fast;
+  }
+
+  &__toggle--open {
+    .navbar__toggle-bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .navbar__toggle-bar:nth-child(2) {
+      opacity: 0;
+    }
+    .navbar__toggle-bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
+  // ---------- Mobile drawer ----------
+  &__backdrop {
+    display: none;
+
+    &--open {
+      display: block;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 90;
+      animation: navbar-fade-in v.$transition-fast ease forwards;
+    }
+
+    @include m.respond-to(md) {
+      display: none !important;
+    }
+  }
+
+  &__drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: min(84vw, 340px);
+    background: v.$color-white;
+    box-shadow: -12px 0 32px rgba(0, 0, 0, 0.14);
+    z-index: 100;
+    padding: v.$space-8 v.$space-5 v.$space-6;
+    transform: translateX(100%);
+    transition: transform v.$transition-base;
+    overflow-y: auto;
+
+    &--open {
+      transform: translateX(0);
+    }
+
+    @include m.respond-to(md) {
+      display: none !important;
+    }
+  }
+
+  // ---------- Drawer header (title + close/cancel button) ----------
+  &__drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: v.$space-5;
+    padding-bottom: v.$space-4;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  &__drawer-title {
+    font-size: v.$font-size-md;
+    font-weight: v.$font-weight-semibold;
+    color: v.$color-text-dark;
+  }
+
+  &__drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: rgba(v.$color-primary, 0.1);
+    color: v.$color-primary;
+    border: none;
+    cursor: pointer;
+    transition: background v.$transition-fast, color v.$transition-fast, transform v.$transition-fast;
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    &:hover,
+    &:focus-visible {
+      background: v.$color-primary;
+      color: v.$color-white;
+      transform: rotate(90deg);
+    }
+  }
+
+  // ---------- Drawer link (top-level, with icon) ----------
+  &__drawer-link {
+    display: flex;
+    align-items: center;
+    gap: v.$space-3;
+    padding: v.$space-3 0;
+    color: v.$color-text-dark;
+    font-size: v.$font-size-md;
+    font-weight: v.$font-weight-semibold;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+
+    .navbar__item-icon {
+      width: 28px;
+      height: 28px;
+
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+
+  // ---------- Drawer dropdown trigger (top-level, with icon) ----------
+  &__drawer-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: v.$space-3 0;
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    color: v.$color-text-dark;
+    font-size: v.$font-size-md;
+    font-weight: v.$font-weight-semibold;
+    font-family: inherit;
+    cursor: pointer;
+
+    .navbar__chevron {
+      width: 10px;
+      height: 10px;
+      flex-shrink: 0;
+    }
+
+    &--open .navbar__chevron {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__drawer-trigger-left {
+    display: flex;
+    align-items: center;
+    gap: v.$space-3;
+
+    .navbar__item-icon {
+      width: 28px;
+      height: 28px;
+
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+
+  &__drawer-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height v.$transition-base;
+
+    &--open {
+      max-height: 300px;
+    }
+  }
+
+  &__drawer-item {
+    display: flex;
+    align-items: center;
+    gap: v.$space-3;
+    padding: v.$space-2 0 v.$space-2 v.$space-2;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: v.$font-size-sm;
+    font-weight: v.$font-weight-medium;
+    text-decoration: none;
+
+    .navbar__item-icon {
+      width: 26px;
+      height: 26px;
+
+      svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+
+  &__drawer-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: v.$space-6;
+    background: v.$color-primary;
+    color: v.$color-white;
+    font-weight: v.$font-weight-semibold;
+    text-decoration: none;
+    padding: v.$space-3 v.$space-4;
+    border-radius: v.$radius-full;
+  }
+
+  // ---------- Drawer admin (secondary button under CTA) ----------
+  &__drawer-admin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: v.$space-3;
+    background: transparent;
+    color: v.$color-primary;
+    font-weight: v.$font-weight-semibold;
+    text-decoration: none;
+    padding: v.$space-3 v.$space-4;
+    border-radius: v.$radius-full;
+    border: 1.5px solid v.$color-primary;
+    transition: background v.$transition-fast, color v.$transition-fast;
+
+    &:hover,
+    &:focus-visible {
+      background: v.$color-primary;
+      color: v.$color-white;
+    }
+  }
+}
+
+@keyframes navbar-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

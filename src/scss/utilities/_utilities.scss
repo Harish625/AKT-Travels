@@ -1,0 +1,95 @@
+// =========================================================
+// UTILITIES
+// Small single-purpose helper classes, used sparingly
+// on top of the component/layout classes above.
+// =========================================================
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+// ---------- Text alignment ----------
+.text-center { text-align: center; }
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+
+// ---------- Text color ----------
+.text-primary   { color: v.$color-primary; }
+.text-secondary { color: v.$color-secondary; }
+.text-muted     { color: v.$color-text-muted; }
+.text-white     { color: v.$color-white; }
+
+// ---------- Background ----------
+.bg-white { background: v.$color-white; }
+.bg-alt   { background: v.$color-bg-alt; }
+
+// ---------- Spacing (margin/padding), generated from the spacing scale ----------
+$spacers: (
+  0: 0,
+  1: v.$space-1,
+  2: v.$space-2,
+  3: v.$space-3,
+  4: v.$space-4,
+  5: v.$space-5,
+  6: v.$space-6,
+  7: v.$space-7,
+  8: v.$space-8
+);
+
+@each $key, $value in $spacers {
+  .mt-#{$key} { margin-top: $value; }
+  .mb-#{$key} { margin-bottom: $value; }
+  .mx-#{$key} { margin-inline: $value; }
+  .my-#{$key} { margin-block: $value; }
+  .pt-#{$key} { padding-top: $value; }
+  .pb-#{$key} { padding-bottom: $value; }
+  .px-#{$key} { padding-inline: $value; }
+  .py-#{$key} { padding-block: $value; }
+}
+
+// ---------- Display / visibility ----------
+.hidden { display: none !important; }
+
+.hide-mobile {
+  display: none !important;
+  @include m.respond-to(md) {
+    display: revert !important;
+  }
+}
+
+.hide-desktop {
+  @include m.respond-to(md) {
+    display: none !important;
+  }
+}
+
+.sr-only {
+  @include m.visually-hidden;
+}
+
+// ---------- Misc ----------
+.rounded    { border-radius: v.$radius-md; }
+.rounded-lg { border-radius: v.$radius-lg; }
+.rounded-full { border-radius: v.$radius-full; }
+
+.shadow-sm { box-shadow: v.$shadow-sm; }
+.shadow-md { box-shadow: v.$shadow-md; }
+
+// =========================================================
+// AKT Travel — Global responsive utilities
+// New file: create as utilities/_responsive.scss
+// Section-specific responsive rules live alongside each
+// component (e.g. components/_home.scss).
+// =========================================================
+
+html, body {
+  overflow-x: hidden; // guard against any accidental horizontal scroll
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

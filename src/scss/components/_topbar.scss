@@ -1,0 +1,369 @@
+// =========================================================
+// COMPONENTS / TOPBAR
+// AKT Travel — Bright Amber Topbar
+// =========================================================
+
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+
+// =========================================================
+// TOPBAR
+// =========================================================
+
+app-topbar {
+  display: block;
+  width: 100%;
+}
+
+.topbar {
+  background: v.$color-primary;
+  color: v.$color-white;
+
+  font-family: v.$font-heading;
+  font-size: v.$font-size-sm;
+
+  width: 100%;
+
+  position: relative;
+  z-index: v.$z-topbar;
+
+  min-height: v.$topbar-height;
+
+  transition:
+    transform v.$transition-medium,
+    opacity v.$transition-base;
+
+
+  // -------------------------------------------------------
+  // Hidden state
+  // -------------------------------------------------------
+
+  &--hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+
+  // -------------------------------------------------------
+  // Inner container
+  // -------------------------------------------------------
+
+  &__inner {
+    @include m.container;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: v.$space-1;
+    min-height: v.$topbar-height;
+    padding-block: 0.35rem;
+    padding-inline: 1.25rem;
+    overflow: hidden;
+
+
+    @include m.respond-to(md) {
+      flex-direction: row;
+
+      justify-content: space-between;
+      align-items: center;
+
+      gap: v.$space-2;
+
+      padding-block: 0;
+
+      min-height: v.$topbar-height;
+      overflow: visible;
+    }
+  }
+
+
+  // =======================================================
+  // ADDRESS
+  // =======================================================
+
+  &__address {
+    @include m.flex(
+      row,
+      flex-start,
+      center,
+      v.$space-1
+    );
+
+    flex: 1 1 auto;
+    min-width: 0;
+
+    color: v.$color-white;
+
+
+    @include m.respond-to(md) {
+      width: auto;
+
+      max-width: 74%;
+
+      flex-shrink: 1;
+
+      min-width: 0;
+      overflow: visible;
+    }
+  }
+
+
+  // =======================================================
+  // ADDRESS — MARQUEE TRACK (mobile only)
+  // -------------------------------------------------------
+  // ".topbar__address-track" is the visible "window" — it
+  // clips overflow so nothing shows outside the topbar.
+  // ".topbar__address-marquee" is the moving strip — it
+  // holds the address TWICE back to back and slides from
+  // 0 to -50%. Since the strip is exactly double-width,
+  // -50% lines the second copy up perfectly where the first
+  // one started, so the loop has no jump, snap, or gap.
+  // =======================================================
+
+  &__address-track {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+
+    @include m.respond-to(md) {
+      overflow: visible;
+    }
+  }
+
+  &__address-marquee {
+    display: inline-flex;
+    white-space: nowrap;
+    will-change: transform;
+    animation: topbarAddressScroll 16s linear infinite;
+
+    @include m.respond-to(md) {
+      display: inline-block;
+      animation: none;
+      transform: none;
+    }
+
+    // Pause on keyboard focus so screen-reader / keyboard
+    // users get a stable read instead of moving text.
+    &:focus-within {
+      animation-play-state: paused;
+    }
+  }
+
+  &__address-text {
+    font-weight: v.$font-weight-medium;
+    letter-spacing: 0.01em;
+    line-height: v.$line-height-normal;
+    white-space: nowrap;
+    padding-right: 3.5rem; // gap before the looping duplicate
+
+    // The duplicate copy exists only to make the mobile loop
+    // seamless — hide it once the marquee is switched off.
+    &:nth-child(2) {
+      @include m.respond-to(md) {
+        display: none;
+      }
+    }
+
+    @include m.respond-to(md) {
+      padding-right: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &__address-marquee {
+      animation: none;
+      transform: none;
+    }
+  }
+
+
+  // =======================================================
+  // CONTACT
+  // =======================================================
+
+  &__contact {
+    @include m.flex(
+      row,
+      flex-start,
+      center,
+      v.$space-3
+    );
+
+    flex: 0 0 auto;
+
+    flex-wrap: nowrap;
+
+    row-gap: v.$space-1;
+    z-index: 2;
+
+    @include m.respond-to(md) {
+      width: auto;
+
+      justify-content: flex-end;
+
+      flex-wrap: nowrap;
+
+      margin-left: auto;
+
+      flex-shrink: 0;
+    }
+  }
+
+
+  // =======================================================
+  // CONTACT ITEM
+  // =======================================================
+
+  &__item {
+    @include m.flex(
+      row,
+      flex-start,
+      center,
+      v.$space-2
+    );
+
+    color: v.$color-white;
+
+    font-weight: v.$font-weight-semibold;
+
+    letter-spacing: 0.01em;
+
+    text-decoration: none;
+
+    transition:
+      opacity v.$transition-fast,
+      transform v.$transition-fast;
+
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.85;
+
+      transform: translateY(-1px);
+
+      color: v.$color-white;
+    }
+  }
+
+
+  // =======================================================
+  // ICON — premium line-icon badge
+  // =======================================================
+
+  &__icon {
+    @include m.flex-center;
+
+    width: 26px;
+    height: 26px;
+
+    border-radius: v.$radius-full;
+
+    background: linear-gradient(160deg, #ffffff 0%, #f4f5f7 100%);
+    color: #1e293b;
+
+    box-shadow:
+      0 1px 2px rgba(0, 0, 0, 0.08),
+      0 4px 10px rgba(0, 0, 0, 0.10),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+
+    flex-shrink: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+
+    i, svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      display: block;
+    }
+
+    @include m.respond-to(md) {
+      width: 28px;
+      height: 28px;
+
+      i, svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+
+  &__icon--map,
+  &__icon--phone {
+    color: #d97706;
+  }
+
+  &__icon--whatsapp {
+    color: #16a34a;
+  }
+
+  &__icon--email {
+    color: #0284c7;
+  }
+
+  // Hover / focus lift on the parent link
+  &__item:hover &__icon,
+  &__item:focus-visible &__icon {
+    transform: translateY(-1px) scale(1.06);
+    box-shadow:
+      0 2px 4px rgba(0, 0, 0, 0.10),
+      0 6px 14px rgba(0, 0, 0, 0.14),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+  }
+
+
+  // =======================================================
+  // ADDRESS ICON
+  // =======================================================
+
+  &__address &__icon {
+    width: 24px;
+    height: 24px;
+    z-index: 2;
+    flex-shrink: 0;
+
+    i, svg {
+      width: 13px;
+      height: 13px;
+    }
+  }
+
+
+  // =======================================================
+  // TEXT
+  // =======================================================
+
+  &__text {
+    display: none;
+
+    white-space: nowrap;
+
+
+    @include m.respond-to(md) {
+      display: inline;
+      color: v.$color-white;
+    }
+  }
+
+
+// =========================================================
+// ANIMATION (MOBILE ONLY)
+// =========================================================
+
+@keyframes topbarAddressScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    // -50% of the DOUBLE-WIDTH strip = exactly one address's
+    // width, so the second (duplicate) copy is now sitting
+    // exactly where the first one started. Seamless loop.
+    transform: translateX(-50%);
+  }
+}
+}

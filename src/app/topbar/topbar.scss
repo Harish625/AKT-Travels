@@ -1,0 +1,86 @@
+// =========================================================
+// COMPONENTS / TOPBAR
+// Slim contact strip above the main header - address left,
+// click-to-call / whatsapp / mail on the right.
+// =========================================================
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.topbar {
+  background: v.$color-black;
+  color: v.$color-white;
+  font-family: v.$font-body;
+  font-size: v.$font-size-xs;
+
+  &__inner {
+    @include m.flex(row, space-between, center, v.$space-4);
+    min-height: 40px;
+    flex-wrap: nowrap;
+
+    @include m.respond-to(md) {
+      min-height: 44px;
+    }
+  }
+
+  // ---------- Address (left side) ----------
+  &__address {
+    @include m.flex(row, flex-start, center, v.$space-2);
+    color: v.$color-text-light;
+    display: none; // hidden on mobile, no room
+
+    @include m.respond-to(lg) {
+      display: flex;
+    }
+
+    i {
+      color: v.$color-primary;
+      font-size: v.$font-size-md;
+      flex-shrink: 0;
+    }
+
+    span {
+      @include m.truncate(1);
+      max-width: 420px;
+    }
+  }
+
+  // ---------- Contact links (right side) ----------
+  &__contact {
+    @include m.flex(row, flex-end, center, v.$space-5);
+    margin-left: auto;
+  }
+
+  &__item {
+    @include m.flex(row, flex-start, center, v.$space-2);
+    color: v.$color-white;
+    font-weight: v.$font-weight-medium;
+    transition: color v.$transition-fast;
+
+    i {
+      font-size: v.$font-size-lg;
+      color: v.$color-primary;
+      transition: color v.$transition-fast, transform v.$transition-fast;
+    }
+
+    &:hover {
+      color: v.$color-primary;
+
+      i {
+        transform: scale(1.1);
+      }
+    }
+
+    &--whatsapp i {
+      color: #25d366;
+    }
+  }
+
+  // Text label next to icon - hidden on small phones, icon-only tap target there
+  &__text {
+    display: none;
+
+    @include m.respond-to(sm) {
+      display: inline;
+    }
+  }
+}

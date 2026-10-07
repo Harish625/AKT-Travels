@@ -1,0 +1,657 @@
+<section
+  class="hero"
+  [class.hero--reduced-motion]="prefersReducedMotion"
+  aria-roledescription="carousel"
+  aria-label="AKT Travel featured destinations"
+  (mouseenter)="pause()"
+  (mouseleave)="resume()"
+  (focusin)="pause()"
+  (focusout)="resume()"
+>
+
+  <!-- Background slides -->
+  <div class="hero__backgrounds">
+    <div
+      class="hero__bg"
+      *ngFor="let slide of slides; let i = index; trackBy: trackBySlide"
+      [class.hero__bg--active]="i === activeIndex()"
+      [style.backgroundImage]="'url(' + slide.image + ')'"
+      role="img"
+      [attr.aria-label]="slide.alt"
+      [attr.aria-hidden]="i === activeIndex() ? null : true"
+    ></div>
+    <div class="hero__overlay"></div>
+  </div>
+
+  <!-- Foreground content -->
+  <div class="hero__inner container">
+    <div class="row align-items-center w-100">
+
+      <!-- Text content — full width, card removed -->
+      <div class="col-12 col-lg-8">
+        <div
+          class="hero__content"
+          *ngFor="let slide of slides; let i = index"
+        >
+          <ng-container *ngIf="i === activeIndex()">
+            <p class="hero__label" aria-hidden="false">{{ slide.label }}</p>
+            <h1 class="hero__title">{{ slide.title }}</h1>
+            <p class="hero__description">{{ slide.description }}</p>
+            <div class="hero__cta-group">
+              <button type="button" class="btn btn-primary-custom">
+                {{ slide.primaryButton }}
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary-custom"
+                *ngIf="slide.secondaryButton"
+              >
+                {{ slide.secondaryButton }}
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Carousel controls -->
+  <button
+    type="button"
+    class="hero__arrow hero__arrow--prev"
+    (click)="prev()"
+    aria-label="Previous slide"
+  >
+    <i class="bi bi-chevron-left" aria-hidden="true"></i>
+  </button>
+
+  <button
+    type="button"
+    class="hero__arrow hero__arrow--next"
+    (click)="next()"
+    aria-label="Next slide"
+  >
+    <i class="bi bi-chevron-right" aria-hidden="true"></i>
+  </button>
+
+  <div class="hero__indicators" role="tablist" aria-label="Slide navigation">
+    <button
+      *ngFor="let slide of slides; let i = index"
+      type="button"
+      role="tab"
+      class="hero__indicator"
+      [class.hero__indicator--active]="i === activeIndex()"
+      [attr.aria-selected]="i === activeIndex()"
+      [attr.aria-label]="'Go to slide ' + (i + 1) + ': ' + slide.title"
+      (click)="goTo(i)"
+    ></button>
+  </div>
+
+  <!-- Trust / info bar -->
+  <div class="hero__trust">
+    <div class="hero__trust-item" *ngFor="let stat of trustStats">
+      <i class="bi" [ngClass]="stat.icon" aria-hidden="true"></i>
+      <span>{{ stat.label }}</span>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="about-section" id="about">
+  <div class="about-section__container">
+
+    <!-- Copy column -->
+    <div class="about-section__content">
+      <span class="about-section__eyebrow">About AKT Travels</span>
+
+      <h2 class="about-section__heading">
+        Coimbatore&rsquo;s Most Trusted Travel Partner for Every Journey
+      </h2>
+
+      <p class="about-section__text">
+        AKT Travels is a Coimbatore-based travel company providing premium vehicle
+        rental services across Tamil Nadu, Kerala and Karnataka. Whether you need
+        an SUV for a family trip, a Tempo Traveller for a group outing, a Force
+        Urbania for a luxury corporate event, or a 45-seater AC bus for a wedding
+        function, we have the right vehicle at the right price.
+      </p>
+
+      <p class="about-section__text">
+        Every trip we plan is backed by well-maintained vehicles, experienced and
+        courteous drivers, and round-the-clock support &mdash; so you can focus on
+        the journey while we take care of the road. From short city transfers to
+        multi-day hill-station tours, AKT Travels is built to move families,
+        friends, colleagues and wedding parties safely and comfortably.
+      </p>
+
+      <ul class="about-section__fleet" aria-label="Vehicle categories offered by AKT Travels">
+        <li class="about-section__fleet-item" *ngFor="let item of fleet">
+          <svg class="about-section__fleet-icon" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M4 10.5 8 14.5 16 6" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>{{ item.label }}</span>
+        </li>
+      </ul>
+
+      <!-- <div class="about-section__cta">
+        <a class="about-section__btn about-section__btn--primary" href="#fleet">
+          Explore Our Fleet
+        </a>
+        <a class="about-section__btn about-section__btn--ghost" href="#contact">
+          Get a Quote
+        </a>
+      </div> -->
+    </div>
+
+    <!-- Photo collage column -->
+    <div class="about-section__visual">
+      <figure class="about-collage">
+
+        <!-- animated route border wrapping the whole collage -->
+        <svg class="about-collage__frame" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="aboutRouteGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--aw-saffron)"/>
+              <stop offset="100%" stop-color="var(--aw-ghat)"/>
+            </linearGradient>
+          </defs>
+          <rect x="1.2" y="1.2" width="97.6" height="97.6" rx="6"
+                fill="none" stroke="url(#aboutRouteGradient)" stroke-width="1.4"
+                stroke-linecap="round" stroke-dasharray="6 4" class="about-collage__frame-path"/>
+        </svg>
+
+        <div class="about-collage__main">
+          <img [src]="images.main" alt="AKT Travels vehicle on a hill-station route" loading="lazy" />
+        </div>
+
+        <div class="about-collage__secondary about-collage__secondary--top">
+          <img [src]="images.secondaryTop" alt="Comfortable interior of an AKT Travels tempo traveller" loading="lazy" />
+        </div>
+
+        <div class="about-collage__secondary about-collage__secondary--bottom">
+          <img [src]="images.secondaryBottom" alt="AKT Travels AC bus decorated for a wedding function" loading="lazy" />
+        </div>
+
+        <figcaption class="about-collage__badge">
+          <div class="about-collage__badge-stat" *ngFor="let stat of stats">
+            <span class="about-collage__badge-value">{{ stat.value }}</span>
+            <span class="about-collage__badge-label">{{ stat.label }}</span>
+          </div>
+        </figcaption>
+
+      </figure>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="offers-section" id="offers">
+  <div class="offers-section__container">
+
+    <!-- Section header -->
+    <div class="offers-section__header">
+      <span class="offers-section__eyebrow">What We Offer</span>
+      <h2 class="offers-section__heading">Our Rental Categories</h2>
+      <p class="offers-section__subtitle">
+        Whatever the occasion, there&rsquo;s an AKT Travels vehicle built for it &mdash;
+        with a driver who knows how to handle it.
+      </p>
+    </div>
+
+    <!-- Offer cards -->
+    <div class="row g-4">
+      <div
+        class="col-12 col-md-6 col-lg-4"
+        *ngFor="let offer of offers; let i = index"
+      >
+        <div class="offer-card" (click)="navigateToOffer(offer.route)">
+
+          <!-- watermark photo, sits behind everything -->
+          <div
+            class="offer-card__watermark"
+            [style.backgroundImage]="'url(' + offer.image + ')'"
+            aria-hidden="true"
+          ></div>
+          <!-- readability wash on top of the watermark, below the text -->
+          <div class="offer-card__scrim" aria-hidden="true"></div>
+
+          <span class="offer-card__index">{{ (i + 1).toString().padStart(2, '0') }}</span>
+
+          <div class="offer-card__icon">
+            <i class="bi" [ngClass]="offer.icon" aria-hidden="true"></i>
+          </div>
+
+          <h3 class="offer-card__title">{{ offer.title }}</h3>
+          <p class="offer-card__text">{{ offer.description }}</p>
+
+          <span class="offer-card__accent" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="fleet-section" id="fleet">
+  <div class="fleet-section__container">
+
+    <!-- Section header -->
+    <div class="fleet-section__header">
+      <span class="fleet-section__eyebrow">Our Fleet</span>
+      <h2 class="fleet-section__heading">Our Popular Vehicle Choices</h2>
+      <p class="fleet-section__subtitle">
+        Well-maintained, AC vehicles with professional drivers. Choose from our most
+        popular travel options in Coimbatore.
+      </p>
+    </div>
+
+    <!-- Vehicle cards -->
+    <div class="row g-4">
+      <div class="col-12 col-md-6 col-lg-4" *ngFor="let vehicle of fleetVehicles">
+        <div class="fleet-card">
+
+          <span class="fleet-card__badge" *ngIf="vehicle.badge">{{ vehicle.badge }}</span>
+
+          <div
+            class="fleet-card__media"
+            [style.backgroundImage]="'url(' + vehicle.image + ')'"
+          >
+            <span class="fleet-card__media-overlay" aria-hidden="true"></span>
+          </div>
+
+          <div class="fleet-card__body">
+            <h3 class="fleet-card__title">{{ vehicle.title }}</h3>
+            <p class="fleet-card__text">{{ vehicle.description }}</p>
+
+            <div class="fleet-card__chips">
+              <span class="fleet-chip" *ngFor="let feature of vehicle.features">
+                <i class="bi" [ngClass]="feature.icon" aria-hidden="true"></i>
+                {{ feature.label }}
+              </span>
+            </div>
+
+            <div class="fleet-card__actions">
+              <button
+                type="button"
+                class="fleet-btn fleet-btn--details"
+                (click)="openVehicleDetails(vehicle)"
+              >
+                Details
+              </button>
+              <button
+                type="button"
+                class="fleet-btn fleet-btn--book"
+                (click)="bookOnWhatsApp(vehicle)"
+              >
+                <i class="bi bi-whatsapp" aria-hidden="true"></i>
+                Book Now
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- ============ QUICK COMPARISON SECTION ============ -->
+<section class="comparison-section">
+  <div class="comparison-section__watermark comparison-section__watermark--left"></div>
+  <div class="comparison-section__watermark comparison-section__watermark--right"></div>
+
+  <div class="comparison-section__container">
+    <div class="comparison-section__header">
+      <span class="comparison-section__eyebrow">QUICK COMPARISON</span>
+      <h2 class="comparison-section__heading">Vehicle Options &amp; Best Use</h2>
+      <p class="comparison-section__subtitle">
+        Pick the right ride for your trip — from a quick airport drop to a full pilgrimage group tour.
+      </p>
+    </div>
+
+    <div class="comparison-table-wrapper">
+      <div class="table-responsive">
+        <table class="table comparison-table mb-0">
+          <thead>
+            <tr>
+              <th scope="col" class="col-sno">S.No</th>
+              <th scope="col">Vehicle Type</th>
+              <th scope="col">Seating</th>
+              <th scope="col">Ideal For</th>
+              <th scope="col">Service Locations</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (vehicle of vehicleComparisons; track vehicle.type; let i = $index) {
+              <tr>
+                <td class="col-sno" data-label="S.No">{{ i + 1 }}</td>
+                <td data-label="Vehicle Type">
+                  <div class="vehicle-cell">
+                    <span class="vehicle-icon">
+                      <i class="bi" [ngClass]="vehicle.icon"></i>
+                    </span>
+                    <span class="vehicle-name">{{ vehicle.type }}</span>
+                  </div>
+                </td>
+                <td data-label="Seating">
+                  <span class="capacity-value">{{ vehicle.capacity }}</span>
+                </td>
+                <td data-label="Ideal For">
+                  <span class="best-for-text">{{ vehicle.bestFor }}</span>
+                </td>
+                <td data-label="Service Locations">
+                  <span class="available-text">
+                    <i class="bi bi-geo-alt-fill location-icon"></i>
+                    {{ vehicle.availableIn }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="testimonial-section">
+  <div class="testimonial-container">
+
+    <div class="testimonial-header">
+      <span class="testimonial-badge">Traveler Stories</span>
+      <h2 class="testimonial-title">What Our Travelers Say</h2>
+      <p class="testimonial-subtitle">
+        Real experiences from real trips — planned, guided, and delivered by AKT Travels.
+      </p>
+    </div>
+
+    <div class="testimonial-grid">
+      <article class="testimonial-card" *ngFor="let review of featuredReviews">
+  <div class="testimonial-media">
+    <img class="testimonial-media-photo" [src]="review.image" [alt]="review.trip" />
+  </div>
+
+  <img class="testimonial-avatar" [src]="review.avatar" [alt]="review.name" />
+
+  <div class="testimonial-body">
+    <div class="testimonial-stars">
+      <span *ngFor="let s of reviewStars" class="testimonial-star" [class.is-filled]="s <= review.rating">★</span>
+    </div>
+
+    <p class="testimonial-text">{{ review.text }}</p>
+
+    <div class="testimonial-footer">
+      <div class="testimonial-person">
+        <strong class="testimonial-name">{{ review.name }}</strong>
+        <span class="testimonial-meta">{{ review.trip }} · {{ review.location }}</span>
+      </div>
+      <span class="testimonial-date">{{ review.date }}</span>
+    </div>
+  </div>
+</article>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="faq-section">
+  <div class="faq-container">
+
+    <div class="faq-header">
+      <span class="faq-badge">Got Questions?</span>
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+      <p class="faq-subtitle">Common Questions About Vehicle Rental</p>
+    </div>
+
+    <div class="faq-layout">
+
+      <!-- Accordion column -->
+      <div class="faq-list">
+        <div
+          class="faq-item"
+          *ngFor="let item of faqs; let i = index"
+          [class.is-open]="isOpen(i)"
+          [style.--stagger]="i"
+        >
+          <button
+            class="faq-question"
+            type="button"
+            (click)="toggle(i)"
+            [attr.aria-expanded]="isOpen(i)"
+            [attr.aria-controls]="'faq-answer-' + i"
+          >
+            <span class="faq-number">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            <span class="faq-question-text">{{ item.question }}</span>
+            <span class="faq-icon" aria-hidden="true">
+              <span class="faq-icon-line faq-icon-line--h"></span>
+              <span class="faq-icon-line faq-icon-line--v"></span>
+            </span>
+          </button>
+
+          <div class="faq-answer-wrap" [id]="'faq-answer-' + i">
+            <div class="faq-answer-inner">
+              <p class="faq-answer">{{ item.answer }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sticky help card column -->
+      <aside class="faq-help-card">
+        <div class="faq-help-glow" aria-hidden="true"></div>
+
+        <span class="faq-help-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" width="26" height="26">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12c0 1.85.505 3.583 1.385 5.07L2 22l5.07-1.385A9.958 9.958 0 0 0 12 22Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M8.5 9.5c0 3.5 3 6.5 6.5 6.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </span>
+
+        <h3 class="faq-help-title">Still have questions?</h3>
+        <p class="faq-help-text">
+          Our travel desk is online right now — send us your trip details and get a quote in minutes.
+        </p>
+
+        <button class="faq-help-btn faq-help-btn--primary" type="button" (click)="chatOnWhatsApp()">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+            <path d="M12.04 2c-5.52 0-10 4.48-10 10 0 1.77.46 3.45 1.27 4.9L2 22l5.25-1.38A9.94 9.94 0 0 0 12.04 22c5.52 0 10-4.48 10-10s-4.48-10-10-10Zm5.86 14.3c-.25.7-1.24 1.29-1.98 1.44-.53.11-1.22.2-3.55-.76-2.98-1.24-4.9-4.26-5.05-4.46-.15-.2-1.22-1.63-1.22-3.1 0-1.48.77-2.2 1.05-2.5.28-.3.6-.37.8-.37.2 0 .4 0 .58.01.19.01.44-.07.68.53.25.6.85 2.08.92 2.23.07.15.12.33.02.53-.1.2-.15.33-.3.5-.15.18-.32.4-.45.53-.15.15-.31.32-.13.62.18.3.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.48 1.53.3.15.48.13.65-.08.18-.2.75-.87.95-1.17.2-.3.4-.25.68-.15.28.1 1.77.84 2.08 1 .3.15.5.23.58.35.08.13.08.75-.17 1.45Z"/>
+          </svg>
+          Chat on WhatsApp
+        </button>
+
+        <button class="faq-help-btn faq-help-btn--ghost" type="button" (click)="callNow()">
+          <svg viewBox="0 0 24 24" fill="none" width="18" height="18" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Call Now
+        </button>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="reviews-section" id="reviews" (mouseenter)="pauseReviewAutoplay()" (mouseleave)="resumeReviewAutoplay()">
+  <div class="reviews-header">
+    <span class="eyebrow">Customer Stories</span>
+    <h2>What Our Travellers Say</h2>
+    <p class="subtitle">Real experiences from real journeys across Ooty, Coonoor and beyond</p>
+    <button class="add-review-btn" routerLink="/add-review" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+      </svg>
+      Share Your Experience
+    </button>
+  </div>
+ 
+  @if (reviews.length) {
+    <div class="carousel-wrapper">
+      <button class="nav-btn nav-prev" (click)="prevReview()" aria-label="Previous review" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+ 
+      <div class="carousel-stage">
+        @for (review of reviews; track review.id; let i = $index) {
+          <article class="review-card" [attr.data-offset]="getOffset(i)" [ngStyle]="getCardStyle(i)">
+            <div class="quote-icon">&ldquo;</div>
+            <div class="stars">
+              @for (s of stars(review.rating); track $index; let si = $index) {
+                <svg width="18" height="18" viewBox="0 0 24 24"
+                     [attr.fill]="si < review.rating ? '#ff8a3d' : 'none'"
+                     [attr.stroke]="si < review.rating ? '#ff8a3d' : '#d8dbe2'">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z" stroke-width="1.4" stroke-linejoin="round"/>
+                </svg>
+              }
+            </div>
+            <p class="review-text">{{ review.reviewText }}</p>
+            <div class="reviewer">
+              <div class="avatar">{{ review.name.charAt(0) }}</div>
+              <div class="reviewer-info">
+                <span class="reviewer-name">{{ review.name }}</span>
+                <span class="reviewer-meta">{{ review.location }} &middot; {{ review.serviceUsed }}</span>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+ 
+      <button class="nav-btn nav-next" (click)="nextReview()" aria-label="Next review" type="button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+ 
+    @if (reviews.length > 1) {
+      <div class="dots">
+        @for (review of reviews; track review.id; let i = $index) {
+          <button class="dot" [class.active]="i === currentIndex" (click)="goToReview(i)"
+                  [attr.aria-label]="'Go to review ' + (i + 1)" type="button"></button>
+        }
+      </div>
+    }
+  } @else {
+    <div class="empty-state">
+      <p>No reviews yet. Be the first to share your travel experience!</p>
+    </div>
+  }
+</section>
+
+
+
+<section class="travel-stories" aria-labelledby="travel-stories-heading">
+  <div class="travel-stories__container">
+
+    <!-- Left: copy + CTA -->
+    <div class="travel-stories__content">
+      <p class="travel-stories__eyebrow">
+        <span class="travel-stories__eyebrow-dot" aria-hidden="true"></span>
+        Travel Stories
+      </p>
+
+      <h2 id="travel-stories-heading" class="travel-stories__heading">
+        Real Journeys.<br />Real Memories.
+      </h2>
+
+      <p class="travel-stories__text">
+        Explore the places our travelers have discovered, the moments they've
+        captured, and the journeys that made their trips unforgettable.
+      </p>
+
+      <div class="travel-stories__actions">
+        <a
+          class="travel-stories__cta"
+          [routerLink]="tripsRoute"
+        >
+          Explore Recent Trips
+          <svg
+            class="travel-stories__cta-arrow"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3.5 8H12.5M12.5 8L8.5 4M12.5 8L8.5 12"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+
+        <a class="travel-stories__watch" [routerLink]="tripsRoute" fragment="videos">
+          Watch &amp; Explore <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <p class="travel-stories__meta">Videos • Photos • Traveler Experiences</p>
+    </div>
+
+    <!-- Right: image collage -->
+    <div class="travel-stories__collage">
+      <svg
+        class="travel-stories__route"
+        viewBox="0 0 220 180"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M10 150 C 60 170, 90 90, 150 70 S 210 20, 205 10"
+          stroke="var(--akt-orange, #e8622c)"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-dasharray="1 8"
+        />
+      </svg>
+
+      <span class="travel-stories__pin" aria-hidden="true">
+        <svg width="18" height="22" viewBox="0 0 18 22" fill="none">
+          <path
+            d="M9 21C9 21 16 13.6 16 8A7 7 0 1 0 2 8C2 13.6 9 21 9 21Z"
+            fill="var(--akt-orange, #e8622c)"
+          />
+          <circle cx="9" cy="8" r="2.5" fill="#fff" />
+        </svg>
+      </span>
+
+      <figure class="travel-stories__card travel-stories__card--primary" *ngIf="primary">
+        <img [src]="primary.src" [alt]="primary.alt" loading="lazy" />
+      </figure>
+
+      <figure class="travel-stories__card travel-stories__card--secondary" *ngIf="secondary">
+        <img [src]="secondary.src" [alt]="secondary.alt" loading="lazy" />
+      </figure>
+
+      <button
+        *ngIf="video"
+        type="button"
+        class="travel-stories__card travel-stories__card--video"
+        [attr.aria-label]="'Watch video: ' + video.alt"
+        (click)="onVideoActivate(video)"
+      >
+        <img [src]="video.src" [alt]="video.alt" loading="lazy" />
+        <span class="travel-stories__play" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M6 4.5L13.5 9L6 13.5V4.5Z" fill="#fff" />
+          </svg>
+        </span>
+      </button>
+
+      <span class="travel-stories__dot" aria-hidden="true"></span>
+    </div>
+
+  </div>
+</section>
+ 

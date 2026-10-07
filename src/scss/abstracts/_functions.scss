@@ -1,0 +1,20 @@
+// =========================================================
+// ABSTRACTS / FUNCTIONS
+// =========================================================
+@use 'sass:math';
+
+// px -> rem  (base 16px)
+@function rem($px, $base: 16) {
+  @return math.div($px, $base) * 1rem;
+}
+
+// Fluid clamp helper: fluid-size(minPx, maxPx, minViewportPx, maxViewportPx)
+// Returns a clamp() that scales smoothly between min and max as the
+// viewport grows, so headings/body text never need per-breakpoint overrides.
+@function fluid-size($min, $max, $min-vw: 360, $max-vw: 1440) {
+  $slope: math.div($max - $min, $max-vw - $min-vw);
+  $intercept-rem: math.div($min - $slope * $min-vw, 16);
+  $min-rem: math.div($min, 16);
+  $max-rem: math.div($max, 16);
+  @return clamp(#{$min-rem}rem, #{$intercept-rem}rem + #{$slope * 100}vw, #{$max-rem}rem);
+}

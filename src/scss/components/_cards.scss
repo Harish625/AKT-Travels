@@ -1,0 +1,79 @@
+// =========================================================
+// COMPONENTS / CARDS
+// =========================================================
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+@use '../abstracts/functions' as f;
+
+.card {
+  @include m.card;
+  position: relative;
+
+  &:hover {
+    box-shadow: v.$shadow-md;
+    transform: translateY(-4px);
+  }
+
+  &__image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: v.$radius-md;
+    margin-bottom: v.$space-4;
+  }
+
+  &__badge {
+    position: absolute;
+    top: v.$space-3;
+    left: v.$space-3;
+    background: v.$color-primary;
+    color: v.$color-white;
+    font-size: v.$font-size-xs;
+    font-weight: v.$font-weight-semibold;
+    padding: v.$space-1 v.$space-3;
+    border-radius: v.$radius-full;
+  }
+
+  &__title {
+    font-size: v.$font-size-lg;
+    margin-bottom: v.$space-2;
+  }
+
+  &__meta {
+    @include m.flex(row, flex-start, center, v.$space-3);
+    font-size: v.$font-size-sm;
+    color: v.$color-text-muted;
+    margin-bottom: v.$space-4;
+    flex-wrap: wrap;
+  }
+
+  &__price {
+    font-family: v.$font-heading;
+    font-weight: v.$font-weight-bold;
+    color: v.$color-primary;
+    font-size: v.$font-size-xl;
+  }
+
+  &__footer {
+    @include m.flex(row, space-between, center, v.$space-3);
+    margin-top: v.$space-4;
+    flex-wrap: wrap;
+  }
+}
+
+// Stat block (e.g. "8,500+ Happy Customers")
+.stat {
+  text-align: center;
+
+  &__number {
+    font-family: v.$font-heading;
+    font-size: f.fluid-size(28, 40);
+    font-weight: v.$font-weight-bold;
+    color: v.$color-primary;
+  }
+
+  &__label {
+    font-size: v.$font-size-sm;
+    color: v.$color-text-muted;
+  }
+}

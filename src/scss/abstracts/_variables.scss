@@ -1,0 +1,246 @@
+// =========================================================
+// AKT TRAVEL — GLOBAL DESIGN TOKENS
+// =========================================================
+
+// =========================================================
+// BRAND COLORS
+// =========================================================
+
+// Main brand color
+// Used for:
+// - Topbar
+// - Navbar
+// - Primary buttons
+// - CTA
+// - Active states
+$color-primary: #F59E0B;
+
+// Dark version for hover
+$color-primary-dark: #D97706;
+
+// Light version
+$color-primary-light: #FEF3C7;
+
+// Secondary brand color
+$color-secondary: #0EA5E9;
+$color-secondary-dark: #0284C7;
+$color-secondary-light: #E0F5FF;
+
+// Success / accent
+$color-accent: #22C55E;
+$color-accent-dark: #16A34A;
+
+// Status colors
+$color-warning: #F59E0B;
+$color-danger: #EF4444;
+
+
+// =========================================================
+// NEUTRAL COLORS
+// =========================================================
+
+$color-white: #FFFFFF;
+$color-bg: #FFFFFF;
+$color-bg-alt: #F8FAFC;
+
+$color-text: #1E293B;
+$color-text-dark: #1A1A1A;
+$color-text-muted: #64748B;
+$color-text-light: #94A3B8;
+
+$color-black: #0F172A;
+
+$color-border: #E2E8F0;
+
+
+// =========================================================
+// HERO COLORS
+// =========================================================
+
+$hero-text: #FFFFFF;
+
+$hero-text-muted: rgba(255, 255, 255, 0.82);
+
+$overlay-gradient: linear-gradient(
+  100deg,
+  rgba(15, 23, 42, 0.78) 0%,
+  rgba(15, 23, 42, 0.55) 38%,
+  rgba(15, 23, 42, 0.28) 65%,
+  rgba(15, 23, 42, 0.15) 100%
+);
+
+
+// =========================================================
+// TYPOGRAPHY
+// =========================================================
+
+$font-heading:
+  'Poppins',
+  'Segoe UI',
+  -apple-system,
+  BlinkMacSystemFont,
+  sans-serif;
+
+$font-body:
+  'Inter',
+  'Segoe UI',
+  -apple-system,
+  BlinkMacSystemFont,
+  sans-serif;
+
+$font-display:
+  'Playfair Display',
+  Georgia,
+  'Times New Roman',
+  serif;
+
+
+// =========================================================
+// FONT SIZES
+// =========================================================
+
+$font-size-xs: 0.75rem;     // 12px
+$font-size-sm: 0.875rem;    // 14px
+$font-size-base: 1rem;      // 16px
+$font-size-md: 1rem;        // 16px
+$font-size-lg: 1.125rem;    // 18px
+$font-size-xl: 1.25rem;     // 20px
+$font-size-2xl: 1.5rem;     // 24px
+$font-size-3xl: 2rem;       // 32px
+
+
+// =========================================================
+// FONT WEIGHTS
+// =========================================================
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+
+// =========================================================
+// LINE HEIGHT
+// =========================================================
+
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-loose: 1.75;
+
+
+// =========================================================
+// SPACING
+// =========================================================
+
+$space-1: 0.25rem;   // 4px
+$space-2: 0.5rem;    // 8px
+$space-3: 0.75rem;   // 12px
+$space-4: 1rem;      // 16px
+$space-5: 1.5rem;    // 24px
+$space-6: 2rem;      // 32px
+$space-7: 2.5rem;    // 40px
+$space-8: 3rem;      // 48px
+$space-9: 4rem;      // 64px
+$space-10: 5rem;     // 80px
+$space-11: 6rem;     // 96px
+
+
+// =========================================================
+// BORDER RADIUS
+// =========================================================
+
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+$radius-full: 999px;
+
+
+// =========================================================
+// SHADOWS
+// =========================================================
+
+$shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+
+$shadow-md:
+  0 4px 12px rgba(15, 23, 42, 0.08);
+
+$shadow-lg:
+  0 12px 32px rgba(15, 23, 42, 0.12);
+
+$shadow-primary:
+  0 8px 20px rgba(245, 158, 11, 0.25);
+
+
+// =========================================================
+// LAYOUT
+// =========================================================
+
+$container-max-width: 1200px;
+$container-padding: 1rem;
+
+
+// =========================================================
+// Z-INDEX
+// =========================================================
+
+$z-header: 100;
+$z-topbar: 1002;
+$z-navbar: 1001;
+$z-modal: 200;
+$z-toast: 300;
+
+
+// =========================================================
+// BREAKPOINTS
+// =========================================================
+
+$bp-sm: 480px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+$bp-xxl: 1536px;
+
+
+// Optional breakpoint map
+$breakpoints: (
+  sm: $bp-sm,
+  md: $bp-md,
+  lg: $bp-lg,
+  xl: $bp-xl,
+  xxl: $bp-xxl
+);
+
+
+// =========================================================
+// TRANSITIONS
+// =========================================================
+
+$transition-fast: 0.15s ease;
+$transition-base: 0.25s ease;
+$transition-medium: 0.5s ease;
+
+$transition-slow:
+  1.1s cubic-bezier(0.22, 1, 0.36, 1);
+
+
+// =========================================================
+// HERO
+// =========================================================
+
+$hero-slide-interval: 6000ms;
+
+
+// =========================================================
+// TOPBAR / NAVBAR HEIGHT
+// =========================================================
+
+$topbar-height: 44px;
+$navbar-height: 76px;
+
+// _variables.scss கடைசில add பண்ணுங்க
+$space-xs: $space-1;
+$space-sm: $space-3;
+$space-md: $space-4;
+$space-lg: $space-5;
+$space-xl: $space-6;

@@ -1,0 +1,49 @@
+:host {
+  display: contents;
+}
+
+/* Fixed to the bottom edge, offset by the sidebar's width — always visible,
+   never scrolls away with long pages. */
+.admin-footer {
+  position: fixed;
+  left: var(--admin-sidebar-w, 280px);
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  min-height: var(--admin-footer-h, 52px);
+  border-top: 1px solid var(--admin-line-soft);
+  background: var(--admin-paper);
+  color: var(--admin-muted);
+  font-size: 0.8rem;
+  transition: left 0.24s var(--admin-ease);
+}
+
+.admin-footer-inner {
+  width: min(100%, 1440px);
+  height: 100%;
+  min-height: var(--admin-footer-h, 52px);
+  margin-inline: auto;
+  padding: 0.75rem clamp(1rem, 2.6vw, 2rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.admin-footer strong {
+  color: var(--admin-ink);
+}
+
+@media (max-width: 860px) {
+  .admin-footer {
+    left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .admin-footer-inner {
+    justify-content: center;
+    text-align: center;
+  }
+}

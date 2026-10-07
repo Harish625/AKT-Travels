@@ -1,0 +1,111 @@
+// =========================================================
+// BASE / TYPOGRAPHY
+// One place that defines every heading/text size on the site.
+// Uses fluid clamp() sizing -> no separate mobile/desktop overrides needed.
+// =========================================================
+@use '../abstracts/variables' as v;
+@use '../abstracts/functions' as f;
+
+// Import Google Fonts (or self-host these in production for performance)
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+body {
+  font-family: v.$font-body;
+  font-size: f.fluid-size(15, 16);
+  font-weight: v.$font-weight-regular;
+  line-height: v.$line-height-normal;
+  color: v.$color-text;
+  background-color: v.$color-bg;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: v.$font-heading;
+  font-weight: v.$font-weight-semibold;
+  line-height: v.$line-height-tight;
+  color: v.$color-black;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: f.fluid-size(34, 56);
+  font-weight: v.$font-weight-bold;
+}
+
+h2 {
+  font-size: f.fluid-size(28, 42);
+  font-weight: v.$font-weight-bold;
+}
+
+h3 {
+  font-size: f.fluid-size(22, 30);
+}
+
+h4 {
+  font-size: f.fluid-size(19, 24);
+}
+
+h5 {
+  font-size: f.fluid-size(17, 20);
+}
+
+h6 {
+  font-size: f.fluid-size(15, 17);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+p {
+  font-size: f.fluid-size(15, 17);
+  line-height: v.$line-height-loose;
+  color: v.$color-text;
+
+  &.lead {
+    font-size: f.fluid-size(17, 20);
+    color: v.$color-text-muted;
+  }
+
+  &.text-muted {
+    color: v.$color-text-muted;
+  }
+
+  &.text-sm {
+    font-size: v.$font-size-sm;
+  }
+}
+
+a {
+  color: v.$color-secondary;
+  transition: color v.$transition-fast;
+
+  &:hover {
+    color: v.$color-secondary-dark;
+  }
+}
+
+small {
+  font-size: v.$font-size-sm;
+  color: v.$color-text-muted;
+}
+
+strong, b {
+  font-weight: v.$font-weight-semibold;
+}
+
+blockquote {
+  border-left: 3px solid v.$color-primary;
+  padding-left: v.$space-4;
+  color: v.$color-text-muted;
+  font-style: italic;
+}
+
+// Eyebrow / kicker label used above section headings site-wide
+.eyebrow {
+  display: inline-block;
+  font-family: v.$font-heading;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-semibold;
+  color: v.$color-primary;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: v.$space-2;
+}

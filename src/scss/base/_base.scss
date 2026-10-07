@@ -1,0 +1,74 @@
+// =========================================================
+// BASE / BASE ELEMENTS
+// =========================================================
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+html {
+  background: v.$color-white; // pure bright white, always
+}
+
+::selection {
+  background: v.$color-primary-light;
+  color: v.$color-primary-dark;
+}
+
+// Slim, brand-colored scrollbar (webkit browsers)
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: v.$color-bg-alt;
+}
+::-webkit-scrollbar-thumb {
+  background: v.$color-secondary;
+  border-radius: v.$radius-full;
+}
+
+// Consistent focus state for keyboard users, site-wide
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  @include m.focus-ring;
+}
+
+// Form fields
+input,
+textarea,
+select {
+  width: 100%;
+  padding: v.$space-3 v.$space-4;
+  border: 1px solid v.$color-border;
+  border-radius: v.$radius-md;
+  background: v.$color-white;
+  font-size: v.$font-size-md;
+  color: v.$color-text;
+  transition: border-color v.$transition-fast, box-shadow v.$transition-fast;
+
+  &::placeholder {
+    color: v.$color-text-light;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: v.$color-secondary;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+  }
+}
+
+label {
+  display: block;
+  font-size: v.$font-size-sm;
+  font-weight: v.$font-weight-medium;
+  color: v.$color-text;
+  margin-bottom: v.$space-2;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid v.$color-border;
+  margin-block: v.$space-6;
+}

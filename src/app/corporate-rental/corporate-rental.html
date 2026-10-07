@@ -1,0 +1,399 @@
+<section class="ch-hero">
+  <!-- Soft decorative shapes — kept low-opacity so the section stays white -->
+  <div class="ch-hero__decor ch-hero__decor--one" aria-hidden="true"></div>
+  <div class="ch-hero__decor ch-hero__decor--two" aria-hidden="true"></div>
+  <div class="ch-hero__dots" aria-hidden="true"></div>
+
+  <div class="ch-hero__container">
+
+    <!-- Content column -->
+    <div class="ch-hero__content">
+      <span class="ch-hero__eyebrow">
+        <i class="bi bi-building" aria-hidden="true"></i>
+        Corporate Travel
+      </span>
+
+      <h1 class="ch-hero__title">
+        Corporate Travel,
+        <span>Made Simple</span>
+      </h1>
+
+      <p class="ch-hero__subtitle">
+        Reliable employee transportation and corporate vehicle rental solutions
+        designed around your business schedules, routes, and travel requirements.
+      </p>
+
+      <div class="ch-hero__actions">
+        <button type="button" class="ch-btn ch-btn--primary" (click)="requestCorporateQuote()">
+          <span class="ch-btn__shine" aria-hidden="true"></span>
+          <i class="bi bi-send-fill" aria-hidden="true"></i>
+          Request a Corporate Quote
+        </button>
+
+        <button type="button" class="ch-btn ch-btn--outline" (click)="talkToTravelTeam()">
+          <i class="bi bi-telephone-fill" aria-hidden="true"></i>
+          Talk to Our Travel Team
+        </button>
+      </div>
+
+      <ul class="ch-hero__highlights">
+        <li *ngFor="let item of highlights; let i = index" [style.--h-stagger]="i">
+          <span class="ch-hero__highlight-icon">
+            <i class="bi" [ngClass]="item.icon" aria-hidden="true"></i>
+          </span>
+          <span>{{ item.label }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Signature visual column: live trip dashboard card -->
+    <div class="ch-hero__visual">
+      <div class="ch-hero__visual-inner">
+
+        <div class="trip-card">
+          <div class="trip-card__header">
+            <span class="trip-card__title">
+              <i class="bi bi-broadcast" aria-hidden="true"></i>
+              Live Route Preview
+            </span>
+            <span class="trip-card__status">
+              <span class="trip-card__status-dot" aria-hidden="true"></span>
+              Active
+            </span>
+          </div>
+
+          <div class="trip-card__map">
+            <div class="trip-card__path" aria-hidden="true">
+              <span class="trip-card__vehicle">
+                <i class="bi bi-car-front-fill" aria-hidden="true"></i>
+              </span>
+            </div>
+
+            <div class="trip-card__point trip-card__point--start">
+              <span class="trip-card__pin"></span>
+              <div>
+                <span class="trip-card__label">From</span>
+                <strong>{{ tripPreview.from }}</strong>
+              </div>
+            </div>
+
+            <div class="trip-card__point trip-card__point--end">
+              <span class="trip-card__pin trip-card__pin--end"></span>
+              <div>
+                <span class="trip-card__label">To</span>
+                <strong>{{ tripPreview.to }}</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="trip-card__footer">
+            <div>
+              <span class="trip-card__label">Vehicle</span>
+              <strong>{{ tripPreview.vehicle }}</strong>
+            </div>
+            <div class="trip-card__eta">
+              <i class="bi bi-clock-history" aria-hidden="true"></i>
+              <div>
+                <span class="trip-card__label">ETA</span>
+                <strong>{{ tripPreview.eta }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating premium badges -->
+        <div
+          class="ch-hero__badge"
+          *ngFor="let badge of floatingBadges; let i = index"
+          [class]="'ch-hero__badge--' + i"
+        >
+          <span class="ch-hero__badge-icon">
+            <i class="bi" [ngClass]="badge.icon" aria-hidden="true"></i>
+          </span>
+          <div>
+            <strong>{{ badge.label }}</strong>
+            <span>{{ badge.meta }}</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="corp-why">
+  <div class="corp-why__decor" aria-hidden="true"></div>
+
+  <div class="corp-why__container">
+
+    <div class="corp-why__header" data-reveal>
+      <span class="corp-why__eyebrow">Why Choose AKT</span>
+      <h2 class="corp-why__title">Transportation That Works Around Your Business</h2>
+      <p class="corp-why__text">
+        From daily employee transportation to client visits, business meetings, conferences,
+        and corporate events, AKT Travels provides dependable rental solutions tailored to
+        your organization.
+      </p>
+    </div>
+
+    <div class="corp-why__grid">
+      <article
+        class="corp-why-card"
+        *ngFor="let card of cards; let i = index"
+        data-reveal
+        [style.--stagger]="i"
+      >
+        <span class="corp-why-card__number" aria-hidden="true">{{ card.number }}</span>
+
+        <span class="corp-why-card__icon">
+          <i class="bi" [ngClass]="card.icon" aria-hidden="true"></i>
+        </span>
+
+        <h3>{{ card.title }}</h3>
+        <p>{{ card.description }}</p>
+
+        <span class="corp-why-card__accent" aria-hidden="true"></span>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<section class="corp-solutions-section">
+  <div class="corp-solutions-section__container">
+
+    <div class="corp-solutions-section__header" data-reveal>
+      <span class="corp-solutions-section__eyebrow">Solutions</span>
+      <h2 class="corp-solutions-section__title">Corporate Rental Solutions</h2>
+      <p class="corp-solutions-section__subtitle">
+        Built for the different ways your organization moves — from a single
+        airport pick-up to a full outstation business trip.
+      </p>
+    </div>
+
+    <div class="corp-solutions-grid">
+      @for (row of solutions; track row.service; let i = $index) {
+        <div class="corp-solutions-card" data-reveal [style.--row-stagger]="i">
+          <div class="corp-solutions-card__top">
+            <span class="corp-solutions-card__icon">
+              <i class="bi" [ngClass]="row.icon" aria-hidden="true"></i>
+            </span>
+            <span class="corp-solutions-card__number">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          </div>
+          <h3 class="corp-solutions-card__title">{{ row.service }}</h3>
+          <p class="corp-solutions-card__description">{{ row.description }}</p>
+          <span class="corp-solutions-card__glow" aria-hidden="true"></span>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>
+
+
+<section class="corp-fleet-section">
+  <div class="corp-fleet-section__container">
+
+    <div class="corp-fleet-section__header" data-reveal>
+      <span class="corp-fleet-section__eyebrow">Fleet</span>
+      <h2 class="corp-fleet-section__title">Our Corporate Fleet</h2>
+      <p class="corp-fleet-section__subtitle">
+        Every category, well-maintained and ready with a professional driver.
+      </p>
+    </div>
+
+    <div class="corp-fleet-grid">
+      <article
+        class="corp-fleet-card"
+        [class.corp-fleet-card--featured]="vehicle.badge === 'Premium Pick'"
+        *ngFor="let vehicle of vehicles; let i = index"
+        data-reveal
+        [style.--stagger]="i"
+      >
+        <div class="corp-fleet-card__media" [style.backgroundImage]="'url(' + vehicle.image + ')'">
+          <span class="corp-fleet-card__media-overlay" aria-hidden="true"></span>
+
+          <span class="corp-fleet-card__badge" *ngIf="vehicle.badge">{{ vehicle.badge }}</span>
+
+          <h3 class="corp-fleet-card__title">{{ vehicle.title }}</h3>
+        </div>
+
+        <div class="corp-fleet-card__body">
+          <ul class="corp-fleet-card__specs">
+            <li>
+              <i class="bi bi-people-fill" aria-hidden="true"></i>
+              <div>
+                <span>Seating</span>
+                <strong>{{ vehicle.seating }}</strong>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-snow" aria-hidden="true"></i>
+              <div>
+                <span>AC</span>
+                <strong>{{ vehicle.ac }}</strong>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-bag-fill" aria-hidden="true"></i>
+              <div>
+                <span>Luggage</span>
+                <strong>{{ vehicle.luggage }}</strong>
+              </div>
+            </li>
+            <li>
+              <i class="bi bi-person-vcard-fill" aria-hidden="true"></i>
+              <div>
+                <span>Driver Option</span>
+                <strong>{{ vehicle.driverOption }}</strong>
+              </div>
+            </li>
+          </ul>
+
+          <button type="button" class="corp-fleet-card__cta" (click)="enquireAboutVehicle(vehicle)">
+            View Details
+            <i class="bi bi-arrow-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<section class="corp-plans-section">
+  <div class="corp-plans-section__container">
+
+    <div class="corp-plans-section__header" data-reveal>
+      <span class="corp-plans-section__eyebrow">Plans</span>
+      <h2 class="corp-plans-section__title">Flexible Plans</h2>
+      <p class="corp-plans-section__subtitle">
+        From a single day to a fully tailored contract — pick a rhythm that
+        matches how your business travels.
+      </p>
+    </div>
+
+    <!-- Flexibility spectrum: short-term commitment on the left, growing
+         into a fully custom contract on the right -->
+    <div class="plan-spectrum" data-reveal>
+      <span class="plan-spectrum__track" aria-hidden="true"></span>
+      <div class="plan-spectrum__node" *ngFor="let plan of plans; let i = index" [style.--node-index]="i">
+        <span class="plan-spectrum__dot" [class.plan-spectrum__dot--end]="plan.featured"></span>
+        <span class="plan-spectrum__label">{{ plan.title }}</span>
+      </div>
+    </div>
+
+    <!-- Ascending staircase cards, connected visually to the spectrum above -->
+    <div class="corp-plans-grid">
+      <article
+        class="plan-card"
+        [class.plan-card--featured]="plan.featured"
+        *ngFor="let plan of plans; let i = index"
+        data-reveal
+        [style.--stagger]="i"
+        [style.--rise]="3 - i"
+      >
+        <span class="plan-card__connector" aria-hidden="true"></span>
+
+        <span class="plan-card__badge" *ngIf="plan.badge">{{ plan.badge }}</span>
+
+        <span class="plan-card__icon">
+          <i class="bi" [ngClass]="plan.icon" aria-hidden="true"></i>
+        </span>
+
+        <h3>{{ plan.title }}</h3>
+        <p>{{ plan.description }}</p>
+
+        <button type="button" class="plan-card__cta" (click)="enquireAboutPlan(plan)">
+          Enquire
+          <i class="bi bi-arrow-right" aria-hidden="true"></i>
+        </button>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<section class="how-section">
+  <div class="how-section__container">
+
+    <div class="how-section__header" data-reveal-header>
+      <span class="how-section__eyebrow">Process</span>
+      <h2 class="how-section__title">How It Works</h2>
+      <p class="how-section__subtitle">From first message to wheels on the road, in four simple steps.</p>
+    </div>
+
+    <div class="how-timeline" [style.--how-progress.%]="howItWorksProgress()">
+      <span class="how-timeline__line" aria-hidden="true">
+        <span class="how-timeline__line-fill"></span>
+      </span>
+
+      <div
+        class="how-step"
+        *ngFor="let step of steps; let i = index"
+        [class.how-step--right]="i % 2 === 1"
+        [attr.data-step-index]="i"
+      >
+        <span class="how-step__marker" aria-hidden="true">
+          <span class="how-step__dot"></span>
+        </span>
+
+        <div class="how-step__content">
+          <span class="how-step__number" aria-hidden="true">{{ step.number }}</span>
+          <h3 class="how-step__title">{{ step.title }}</h3>
+          <p class="how-step__text">{{ step.description }}</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="corp-benefits-section">
+  <div class="corp-benefits-section__container">
+
+    <div class="corp-benefits-section__header" data-reveal>
+      <span class="corp-benefits-section__eyebrow">Why Businesses Choose Us</span>
+      <h2 class="corp-benefits-section__title">Corporate Benefits Built for Businesses That Value Time</h2>
+      <p class="corp-benefits-section__subtitle">
+        Everything your organization needs from a travel partner — reliable,
+        professional, and easy to plan around.
+      </p>
+    </div>
+
+    <div class="corp-benefits-grid">
+      @for (benefit of benefits; track benefit.id; let i = $index) {
+        <button
+          type="button"
+          class="corp-benefit-card"
+          data-reveal
+          [style.--row-stagger]="i"
+          [class.is-expanded]="expandedId() === benefit.id"
+          (click)="toggleBenefit(benefit.id)"
+          [attr.aria-expanded]="expandedId() === benefit.id"
+        >
+          <span class="corp-benefit-card__icon">
+            <i class="bi" [ngClass]="benefit.icon" aria-hidden="true"></i>
+          </span>
+          <span class="corp-benefit-card__body">
+            <span class="corp-benefit-card__title">{{ benefit.title }}</span>
+            <span class="corp-benefit-card__detail">{{ benefit.detail }}</span>
+          </span>
+          <i class="bi bi-chevron-down corp-benefit-card__chevron" aria-hidden="true"></i>
+        </button>
+      }
+    </div>
+
+    <div class="corp-benefits-section__cta" data-reveal>
+      <p>Want to see how these benefits apply to your fleet needs?</p>
+      <button type="button" class="corp-benefits-section__cta-btn" (click)="contactSales()">
+        <i class="bi bi-whatsapp" aria-hidden="true"></i>
+        Talk to Our Team
+      </button>
+    </div>
+
+  </div>
+</section>

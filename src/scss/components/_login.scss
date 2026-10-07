@@ -1,0 +1,395 @@
+// =========================================================
+// COMPONENTS / LOGIN
+// White jagged-edge card over a photo panel. Left: form | Right: photo
+// =========================================================
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+app-login {
+  display: block;
+}
+
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: v.$space-6 v.$space-4;
+  background:
+    linear-gradient(rgba(6, 39, 51, 0.3), rgba(6, 39, 51, 0.3)),
+    url('/assets/limage1.png') center / cover no-repeat;
+  font-family: v.$font-heading;
+
+  &__card {
+    position: relative;
+    width: 100%;
+    max-width: 1040px;
+    min-height: min(640px, calc(100vh - 4rem));
+    border-radius: v.$radius-lg;
+    overflow: hidden;
+    box-shadow: 0 30px 70px -20px rgba(5, 49, 66, 0.45);
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  // ---------- Photo panel (fills the whole card, behind the jagged panel) ----------
+  &__scene {
+    position: absolute;
+    inset: 0;
+    // Replace with your own photo. Keep the overlay gradient below for text contrast.
+    background-image: url('/assets/limage2.png');
+    background-size: cover;
+    background-position: center;
+  }
+
+  &__scene-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(6, 39, 51, 0.15) 0%,
+      rgba(6, 39, 51, 0.55) 100%
+    );
+  }
+
+  &__scene-content {
+    position: absolute;
+    right: 6%;
+    bottom: 9%;
+    text-align: right;
+    color: v.$color-white;
+    z-index: 2;
+  }
+
+  &__eyebrow {
+    font-size: 12.5px;
+    font-weight: v.$font-weight-semibold;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin: 0 0 10px;
+  }
+
+  &__scene-title {
+    margin: 0;
+    font-size: clamp(28px, 3.4vw, 42px);
+    font-weight: v.$font-weight-bold;
+    letter-spacing: 0.01em;
+    line-height: 1.05;
+    text-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+
+    span {
+      display: block;
+      font-weight: v.$font-weight-medium;
+      font-size: 0.5em;
+      letter-spacing: 0.12em;
+      margin-top: 8px;
+      opacity: 0.9;
+    }
+  }
+
+  // ---------- Left panel (jagged white form panel) ----------
+  &__panel {
+    position: relative;
+    z-index: 3;
+    width: min(48%, 500px);
+    min-height: 100%;
+    background: v.$color-white;
+    padding: clamp(34px, 5vw, 60px) clamp(28px, 4.5vw, 54px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    clip-path: polygon(
+      0% 0%, 100% 0%,
+      88% 5%, 100% 10%,
+      88% 15%, 100% 20%,
+      88% 25%, 100% 30%,
+      88% 35%, 100% 40%,
+      88% 45%, 100% 50%,
+      88% 55%, 100% 60%,
+      88% 65%, 100% 70%,
+      88% 75%, 100% 80%,
+      88% 85%, 100% 90%,
+      88% 95%, 100% 100%,
+      0% 100%
+    );
+
+    @include m.respond-to(md) {
+      width: 47%;
+    }
+  }
+
+  &__brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+    text-decoration: none;
+    margin-bottom: clamp(28px, 5vw, 46px);
+  }
+
+  &__brand-mark {
+    font-size: v.$font-size-lg;
+    font-weight: v.$font-weight-bold;
+    color: v.$color-primary;
+    letter-spacing: -0.02em;
+  }
+
+  &__brand-name {
+    font-size: v.$font-size-lg;
+    font-weight: v.$font-weight-medium;
+    color: v.$color-text-dark;
+    letter-spacing: 0.01em;
+  }
+
+  &__title {
+    font-size: clamp(28px, 3.2vw, 34px);
+    font-weight: v.$font-weight-bold;
+    color: v.$color-text-dark;
+    letter-spacing: 0.01em;
+  }
+
+  &__subtitle {
+    margin: 10px 0 clamp(26px, 4vw, 36px);
+    font-size: v.$font-size-sm;
+    color: rgba(0, 0, 0, 0.55);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: v.$space-4;
+    width: 100%;
+    max-width: 360px;
+  }
+
+  &__field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(v.$color-primary, 0.08);
+    border: 1.5px solid transparent;
+    border-radius: v.$radius-full;
+    padding: 0 v.$space-4;
+    height: 50px;
+    transition: border-color v.$transition-fast, background v.$transition-fast;
+
+    &:focus-within {
+      border-color: v.$color-primary;
+      background: v.$color-white;
+      box-shadow: 0 0 0 4px rgba(v.$color-primary, 0.15);
+    }
+
+    svg {
+      flex-shrink: 0;
+      width: 17px;
+      height: 17px;
+      color: v.$color-primary;
+      margin-right: v.$space-3;
+    }
+
+    input {
+      border: none;
+      outline: none;
+      background: transparent;
+      width: 100%;
+      font-family: inherit;
+      font-size: v.$font-size-sm;
+      color: v.$color-text-dark;
+
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.4);
+      }
+    }
+  }
+
+  &__toggle-visibility {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: v.$color-primary;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    svg {
+      width: 17px;
+      height: 17px;
+      margin: 0;
+    }
+  }
+
+  &__error {
+    font-size: 12.5px;
+    color: #c0392b;
+    margin: -6px 0 0;
+  }
+
+  &__row-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: v.$space-3;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+
+  &__remember {
+    display: flex;
+    align-items: center;
+    gap: v.$space-2;
+    color: rgba(0, 0, 0, 0.55);
+    cursor: pointer;
+    user-select: none;
+
+    input[type='checkbox'] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 17px;
+      height: 17px;
+      border: 1.6px solid rgba(v.$color-primary, 0.5);
+      border-radius: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background v.$transition-fast;
+
+      &:checked {
+        background: v.$color-primary;
+        border-color: v.$color-primary;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3.5 8.2L6.3 11L12.5 4.8' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 11px;
+      }
+    }
+  }
+
+  &__forgot {
+    color: v.$color-primary;
+    font-weight: v.$font-weight-semibold;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: underline;
+    }
+  }
+
+  &__submit {
+    margin-top: v.$space-2;
+    height: 50px;
+    border: none;
+    border-radius: v.$radius-full;
+    background: v.$color-primary;
+    color: v.$color-white;
+    font-weight: v.$font-weight-bold;
+    font-size: 13.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 12px 24px -8px rgba(v.$color-primary, 0.55);
+    transition: transform v.$transition-fast, box-shadow v.$transition-fast, opacity v.$transition-fast;
+
+    &:hover,
+    &:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px -8px rgba(v.$color-primary, 0.6);
+      opacity: 0.95;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // ---------- Responsive ----------
+  @media (max-width: 960px) {
+    padding: v.$space-4;
+
+    &__card {
+      min-height: min(620px, calc(100vh - 2rem));
+    }
+
+    &__panel {
+      width: min(58%, 520px);
+      padding-inline: clamp(24px, 4vw, 42px);
+    }
+
+    &__scene-content {
+      right: 4%;
+      max-width: 34%;
+    }
+  }
+
+  @include m.respond-below(md) {
+    &__panel {
+      width: 64%;
+    }
+    &__scene-content {
+      right: 4%;
+    }
+  }
+
+  @media (max-width: 700px) {
+    padding: 0;
+    align-items: stretch;
+
+    &__card {
+      max-width: 100%;
+      min-height: 100vh;
+      border-radius: 0;
+    }
+
+    &__scene {
+      position: relative;
+      height: 34vh;
+      min-height: 230px;
+      inset: auto;
+    }
+
+    &__scene-content {
+      left: 6%;
+      right: auto;
+      bottom: 12%;
+      text-align: left;
+    }
+
+    &__scene-title {
+      font-size: 24px;
+    }
+
+    &__panel {
+      width: 100%;
+      min-height: 0;
+      flex: 1;
+      clip-path: none;
+      border-radius: v.$radius-lg v.$radius-lg 0 0;
+      margin-top: -20px;
+      padding: 34px 24px 40px;
+    }
+
+    &__form {
+      max-width: 100%;
+    }
+
+    &__row-between {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 380px) {
+    &__panel {
+      padding-inline: 18px;
+    }
+
+    &__brand {
+      margin-bottom: 24px;
+    }
+
+    &__field,
+    &__submit {
+      height: 48px;
+    }
+  }
+}

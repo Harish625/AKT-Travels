@@ -1,0 +1,2044 @@
+
+@use '../abstracts/variables' as *;
+
+// =========================================================
+// STUDENT RENTAL PAGE
+// HERO + WHY STUDENTS
+// =========================================================
+
+// ---------------------------------------------------------
+// Local Theme Variables
+// ---------------------------------------------------------
+
+$white: #ffffff;
+$ink: #0b1526;
+$navy: #14304f;
+$navy-deep: #0a1d33;
+$steel: #64748b;
+
+$orange: #f97316;
+$orange-dark: #ea580c;
+$orange-tint: #fef1e8;
+
+$line: rgba(15, 23, 42, 0.1);
+$tint: #f5f8fc;
+
+$font-display: 'Space Grotesk', 'Inter', sans-serif;
+$font-body: 'Inter', sans-serif;
+
+
+// =========================================================
+// STUDENT HERO
+// =========================================================
+
+.student-hero-section {
+  position: relative;
+  padding: 6.5rem 1.5rem 6rem;
+  overflow: hidden;
+  background: $white;
+}
+
+
+// ---------------------------------------------------------
+// Background Image Slider
+// ---------------------------------------------------------
+
+.student-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.student-hero-bg__slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+
+.student-hero-bg__slide.is-active {
+  opacity: 1;
+}
+
+
+// ---------------------------------------------------------
+// Background Overlay
+// ---------------------------------------------------------
+
+.student-hero-bg__overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(255, 255, 255, 0.94) 42%,
+      rgba(255, 255, 255, 0.75) 68%,
+      rgba(255, 255, 255, 0.55) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.85) 100%
+    );
+}
+
+
+// =========================================================
+// HERO CONTAINER
+// =========================================================
+
+.student-hero-section__container {
+  position: relative;
+  z-index: 1;
+
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+
+  gap: 3rem;
+  align-items: center;
+}
+
+
+// =========================================================
+// HERO CONTENT
+// =========================================================
+
+.student-hero-section__content {
+  text-align: left;
+}
+
+
+// ---------------------------------------------------------
+// Badge
+// ---------------------------------------------------------
+
+.student-hero-section__badge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.55rem;
+
+  margin-bottom: 1.75rem;
+  padding: 0.4rem 1.1rem 0.4rem 0.4rem;
+
+  background: $orange-tint;
+
+  border-radius: 999px;
+
+  color: $orange-dark;
+
+  font-family: $font-body;
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+.student-hero-section__badge-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 26px;
+  height: 26px;
+
+  border-radius: 8px;
+
+  background: $white;
+  color: $orange;
+
+  font-size: 0.9rem;
+}
+
+
+// ---------------------------------------------------------
+// Heading
+// ---------------------------------------------------------
+
+.student-hero-section__heading {
+  margin: 0 0 1.25rem;
+
+  font-family: $font-display;
+  font-size: clamp(2.1rem, 4vw, 3.1rem);
+
+  font-weight: 700;
+  line-height: 1.1;
+
+  letter-spacing: -0.02em;
+}
+
+.student-hero-section__heading-line {
+  display: block;
+  color: $ink;
+}
+
+.student-hero-section__heading-line--accent {
+  color: $orange;
+}
+
+
+// ---------------------------------------------------------
+// Subheading
+// ---------------------------------------------------------
+
+.student-hero-section__subheading {
+  max-width: 480px;
+
+  margin: 0 0 2.25rem;
+
+  color: $steel;
+
+  font-family: $font-body;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+
+// =========================================================
+// HERO ACTIONS
+// =========================================================
+
+.student-hero-section__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  gap: 1rem;
+
+  margin-bottom: 2.5rem;
+}
+
+
+// ---------------------------------------------------------
+// Button Base
+// ---------------------------------------------------------
+
+.student-hero-btn {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.6rem;
+
+  padding: 0.95rem 1.8rem;
+
+  border-radius: 999px;
+
+  font-family: $font-body;
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  border: 1px solid transparent;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+
+  i {
+    font-size: 1rem;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $orange;
+    outline-offset: 2px;
+  }
+}
+
+
+// ---------------------------------------------------------
+// Primary Button
+// ---------------------------------------------------------
+
+.student-hero-btn--primary {
+  background: linear-gradient(
+    120deg,
+    $orange,
+    $orange-dark
+  );
+
+  color: $white;
+
+  box-shadow:
+    0 14px 28px rgba(249, 115, 22, 0.28);
+
+  &:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+      0 18px 34px rgba(249, 115, 22, 0.34);
+  }
+}
+
+
+// ---------------------------------------------------------
+// Secondary Button
+// ---------------------------------------------------------
+
+.student-hero-btn--secondary {
+  background: $white;
+
+  color: $ink;
+
+  border-color: $line;
+
+  &:hover {
+    border-color: rgba(20, 48, 79, 0.3);
+
+    transform: translateY(-2px);
+  }
+
+  i {
+    color: $navy;
+  }
+}
+
+
+// =========================================================
+// HERO HIGHLIGHTS
+// =========================================================
+
+.student-hero-highlights {
+  display: grid;
+
+  grid-template-columns: repeat(2, auto);
+
+  column-gap: 2.25rem;
+  row-gap: 1rem;
+}
+
+.student-hero-highlights__item {
+  display: flex;
+  align-items: center;
+
+  gap: 0.7rem;
+}
+
+.student-hero-highlights__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: $tint;
+
+  border: 1px solid $line;
+
+  color: $navy;
+
+  font-size: 0.95rem;
+}
+
+.student-hero-highlights__label {
+  color: $ink;
+
+  font-family: $font-body;
+  font-size: 0.92rem;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+// =========================================================
+// HERO VISUAL
+// =========================================================
+
+.student-hero-section__visual {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 340px;
+}
+
+
+// ---------------------------------------------------------
+// Trip Preview Card
+// ---------------------------------------------------------
+
+.student-hero-visual-card {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 1.5rem 1.6rem 1.4rem;
+
+  background: $white;
+
+  border: 1px solid $line;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 30px 60px rgba(15, 23, 42, 0.12);
+}
+
+
+// ---------------------------------------------------------
+// Card Header
+// ---------------------------------------------------------
+
+.student-hero-visual-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 1.1rem;
+}
+
+.student-hero-visual-card__header-label {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.4rem;
+
+  color: $orange;
+
+  font-family: $font-body;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+}
+
+
+// ---------------------------------------------------------
+// Status
+// ---------------------------------------------------------
+
+.student-hero-visual-card__status {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 0.4rem;
+
+  color: #16a34a;
+
+  font-family: $font-body;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.student-hero-visual-card__status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #16a34a;
+}
+
+
+// =========================================================
+// ROUTE
+// =========================================================
+
+.student-hero-visual-card__route {
+  position: relative;
+
+  height: 20px;
+
+  margin-bottom: 0.75rem;
+
+  border-top: 2px dashed $line;
+}
+
+.student-hero-visual-card__route-marker {
+  position: absolute;
+
+  top: -15px;
+  left: 62%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      $orange,
+      $orange-dark
+    );
+
+  color: $white;
+
+  font-size: 0.85rem;
+
+  box-shadow:
+    0 8px 16px rgba(249, 115, 22, 0.35);
+}
+
+
+// =========================================================
+// ROUTE STOPS
+// =========================================================
+
+.student-hero-visual-card__stop {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 0.7rem;
+
+  padding: 0.65rem 0;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px dashed $line;
+  }
+}
+
+.student-hero-visual-card__stop-dot {
+  width: 10px;
+  height: 10px;
+
+  margin-top: 0.3rem;
+
+  border-radius: 50%;
+
+  flex-shrink: 0;
+
+  &--from {
+    background: $navy;
+  }
+
+  &--to {
+    background: $orange;
+  }
+}
+
+.student-hero-visual-card__stop-label {
+  display: block;
+
+  color: $steel;
+
+  font-family: $font-body;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+}
+
+.student-hero-visual-card__stop-value {
+  display: block;
+
+  margin-top: 0.15rem;
+
+  color: $ink;
+
+  font-family: $font-display;
+
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+
+// =========================================================
+// CARD FOOTER
+// =========================================================
+
+.student-hero-visual-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 1rem;
+
+  padding-top: 1rem;
+
+  border-top: 1px solid $line;
+
+  &--right {
+    text-align: right;
+  }
+}
+
+.student-hero-visual-card__footer-label {
+  display: block;
+
+  color: $steel;
+
+  font-family: $font-body;
+
+  font-size: 0.68rem;
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+}
+
+.student-hero-visual-card__footer-value {
+  display: block;
+
+  margin-top: 0.2rem;
+
+  color: $ink;
+
+  font-family: $font-display;
+
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+
+// =========================================================
+// FLOATING BADGES
+// =========================================================
+
+.student-hero-floating-badge {
+  position: absolute;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.65rem;
+
+  padding: 0.65rem 1rem;
+
+  background: $white;
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 16px 32px rgba(15, 23, 42, 0.14);
+
+  z-index: 2;
+}
+
+.student-hero-floating-badge--0 {
+  top: -6%;
+  left: -6%;
+}
+
+.student-hero-floating-badge--1 {
+  bottom: -6%;
+  right: -8%;
+}
+
+.student-hero-floating-badge__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      $navy,
+      $navy-deep
+    );
+
+  color: $white;
+
+  font-size: 0.95rem;
+
+  flex-shrink: 0;
+}
+
+.student-hero-floating-badge__label {
+  display: block;
+
+  color: $ink;
+
+  font-family: $font-body;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.student-hero-floating-badge__meta {
+  display: block;
+
+  color: $steel;
+
+  font-family: $font-body;
+
+  font-size: 0.75rem;
+}
+
+
+// =========================================================
+// RESPONSIVE — HERO
+// =========================================================
+
+@media (max-width: 992px) {
+
+  .student-hero-section__container {
+    grid-template-columns: 1fr;
+
+    gap: 3.5rem;
+  }
+
+  .student-hero-section__content {
+    text-align: center;
+  }
+
+  .student-hero-section__subheading {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .student-hero-section__actions {
+    justify-content: center;
+  }
+
+  .student-hero-highlights {
+    justify-content: center;
+    justify-items: start;
+  }
+
+  .student-hero-section__visual {
+    min-height: 300px;
+  }
+}
+
+
+@media (max-width: 720px) {
+
+  .student-hero-section {
+    padding: 4.5rem 1.25rem 3.5rem;
+  }
+
+  .student-hero-section__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .student-hero-btn {
+    justify-content: center;
+
+    width: 100%;
+  }
+
+  .student-hero-highlights {
+    grid-template-columns: 1fr;
+
+    justify-items: center;
+  }
+
+  .student-hero-visual-card {
+    max-width: 100%;
+  }
+
+  .student-hero-floating-badge {
+    padding: 0.55rem 0.8rem;
+  }
+
+  .student-hero-floating-badge--0 {
+    top: -4%;
+    left: -2%;
+  }
+
+  .student-hero-floating-badge--1 {
+    bottom: -4%;
+    right: -2%;
+  }
+}
+
+
+@media (max-width: 420px) {
+
+  .student-hero-section__heading {
+    font-size: 1.85rem;
+  }
+
+  .student-hero-floating-badge {
+    position: static;
+
+    margin-top: 0.75rem;
+  }
+}
+
+
+// =========================================================
+// REDUCED MOTION
+// =========================================================
+
+@media (prefers-reduced-motion: reduce) {
+
+  .student-hero-bg__slide {
+    transition: none;
+  }
+}
+
+
+// =========================================================
+// WHY STUDENTS
+// =========================================================
+
+.why-students {
+  position: relative;
+
+  overflow: hidden;
+
+  background: $white;
+
+  padding: 5rem 1.5rem;
+
+  isolation: isolate;
+}
+
+
+// ---------------------------------------------------------
+// Background Shapes
+// ---------------------------------------------------------
+
+.why-students__bg-shape {
+  position: absolute;
+
+  border-radius: 50%;
+
+  z-index: 0;
+
+  opacity: 0.06;
+
+  pointer-events: none;
+}
+
+.why-students__bg-shape--one {
+  width: 420px;
+  height: 420px;
+
+  top: -180px;
+  right: -140px;
+
+  background: $orange;
+}
+
+.why-students__bg-shape--two {
+  width: 320px;
+  height: 320px;
+
+  bottom: -160px;
+  left: -120px;
+
+  background: $navy;
+}
+
+
+// ---------------------------------------------------------
+// Container
+// ---------------------------------------------------------
+
+.why-students__container {
+  position: relative;
+
+  z-index: 1;
+
+  max-width: 1180px;
+
+  margin: 0 auto;
+}
+
+
+// ---------------------------------------------------------
+// Intro
+// ---------------------------------------------------------
+
+.why-students__intro {
+  text-align: left;
+
+  max-width: 640px;
+
+  margin: 0 0 3rem;
+}
+
+
+// ---------------------------------------------------------
+// Eyebrow
+// ---------------------------------------------------------
+
+.why-students__eyebrow {
+  display: inline-block;
+
+  font-family: $font-body;
+
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  color: $orange;
+
+  margin-bottom: 0.9rem;
+
+  // matches hero eyebrow — plain text, no pill/border
+}
+
+
+// ---------------------------------------------------------
+// Heading
+// ---------------------------------------------------------
+
+.why-students__heading {
+  font-family: 'Poppins', sans-serif;
+
+  font-weight: 800;
+
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
+
+  color: $navy;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.01em;
+
+  margin-bottom: 1.1rem;
+
+  max-width: 620px;
+
+  span {
+    color: $orange; // swap to your hero accent color if it differs
+  }
+}
+
+
+
+
+// ---------------------------------------------------------
+// Content
+// ---------------------------------------------------------
+
+.why-students__content {
+  font-family: $font-body;
+
+  font-size: 1rem;
+
+  line-height: 1.7;
+
+  color: #555b66;
+
+  max-width: 560px;
+
+  margin: 0; // no auto-centering
+}
+
+
+// ---------------------------------------------------------
+// Cards Grid
+// ---------------------------------------------------------
+
+.why-students__grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1.5rem;
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+// =========================================================
+// WHY CARD
+// =========================================================
+
+.why-card {
+  position: relative;
+
+  background: $white;
+
+  border: 1.5px solid #e8e8ef;
+
+  border-radius: 16px;
+
+  padding: 2rem 1.5rem;
+
+  text-align: center;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+
+  animation:
+    why-card-in 0.6s ease both;
+
+  animation-delay:
+    calc(var(--i) * 0.1s);
+
+  &:hover {
+    transform: translateY(-8px);
+
+    border-color: $orange;
+
+    box-shadow:
+      0 16px 32px rgba(0, 0, 0, 0.08);
+
+    .why-card__icon-wrap {
+      background: $orange;
+    }
+
+    .why-card__icon {
+      color: $white;
+    }
+  }
+}
+
+
+// ---------------------------------------------------------
+// Card Icon
+// ---------------------------------------------------------
+
+.why-card__icon-wrap {
+  width: 64px;
+  height: 64px;
+
+  margin: 0 auto 1.25rem;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba($orange, 0.1);
+
+  transition:
+    background 0.35s ease;
+}
+
+.why-card__icon {
+  width: 28px;
+  height: 28px;
+
+  color: $orange;
+
+  transition:
+    color 0.35s ease;
+}
+
+
+// ---------------------------------------------------------
+// Card Title
+// ---------------------------------------------------------
+
+.why-card__title {
+  font-family: 'Poppins', sans-serif;
+
+  font-weight: 600;
+
+  font-size: 1.1rem;
+
+  color: #1a1a2e;
+
+  margin-bottom: 0.5rem;
+}
+
+
+// ---------------------------------------------------------
+// Card Description
+// ---------------------------------------------------------
+
+.why-card__desc {
+  font-family: $font-body;
+
+  font-size: 0.9rem;
+
+  line-height: 1.6;
+
+  color: #6b7280;
+}
+
+
+// =========================================================
+// WHY CARD ANIMATION
+// =========================================================
+
+@keyframes why-card-in {
+
+  from {
+    opacity: 0;
+
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+.why-students__content {
+  font-family: $font-body;
+
+  font-size: 1rem;
+
+  line-height: 1.7;
+
+  color: #555b66;
+
+  max-width: 560px;
+
+  margin: 0; // no auto-centering
+}
+
+
+
+// =========================================================
+// Student Fleet — Vehicle Options
+// Same design language as the corporate fleet section:
+// the "Most Popular" card gets a distinct dark treatment
+// so the fleet has a visible tier, not four identical tiles.
+// =========================================================
+
+$white: #ffffff;
+$ink: #0b1526;
+$navy: #14304f;
+$navy-deep: #0a1d33;
+$steel: #64748b;
+$orange: #f97316;
+$orange-dark: #ea580c;
+$line: rgba(15, 23, 42, 0.09);
+$tint: #f5f8fc;
+$font-display: 'Space Grotesk', 'Inter', sans-serif;
+$font-body: 'Inter', sans-serif;
+
+// -------- Reveal-on-scroll base state --------
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--stagger, 0) * 90ms);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vehicle-options {
+  position: relative;
+  padding: 6rem 1.5rem;
+  background: $white;
+}
+
+.vehicle-options__container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+// -------- Header --------
+.vehicle-options__header {
+  max-width: 640px;
+  margin: 0 0 3rem;
+  text-align: left;
+}
+
+.vehicle-options__eyebrow {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  color: $orange;
+  font-family: $font-body;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.vehicle-options__title {
+  margin: 0 0 0.85rem;
+  color: $ink;
+  font-family: $font-display;
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+.vehicle-options__subtitle {
+  margin: 0;
+  color: $steel;
+  font-family: $font-body;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+// -------- Cards grid --------
+.vehicle-options__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.vehicle-card {
+  overflow: hidden;
+  background: $white;
+  border: 1.5px solid $line;
+  border-radius: 20px;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 26px 48px rgba(15, 23, 42, 0.12);
+  }
+
+  &:focus-within {
+    outline: 2px solid $navy;
+    outline-offset: 2px;
+  }
+}
+
+// -------- Media --------
+.vehicle-card__media {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  height: 190px;
+  padding: 1rem 1.25rem;
+  background-color: #dde3ea;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  transition: background-size 0.5s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(11, 21, 38, 0) 40%, rgba(11, 21, 38, 0.78) 100%);
+    pointer-events: none;
+  }
+}
+
+.vehicle-card:hover .vehicle-card__media {
+  background-size: 112%;
+}
+
+.vehicle-card__badge {
+  position: absolute;
+  top: 0.9rem;
+  left: 0.9rem;
+  z-index: 2;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(249, 115, 22, 0.95);
+  color: $white;
+  font-family: $font-body;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 16px rgba(249, 115, 22, 0.35);
+}
+
+.vehicle-card__name {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  color: $white;
+  font-family: $font-display;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+// -------- Body / specs --------
+.vehicle-card__body {
+  padding: 1.4rem 1.4rem 1.5rem;
+}
+
+.vehicle-card__specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 0.75rem;
+  margin: 0 0 1.4rem;
+}
+
+.spec {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+
+  &__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: $tint;
+    color: $navy;
+
+    svg {
+      width: 17px;
+      height: 17px;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__label {
+    display: block;
+    color: $steel;
+    font-family: $font-body;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  &__value {
+    display: block;
+    overflow: hidden;
+    color: $ink;
+    font-family: $font-body;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.vehicle-card__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid $line;
+  border-radius: 12px;
+  background: $white;
+  color: $navy;
+  font-family: $font-body;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+
+  svg {
+    flex: 0 0 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover {
+    background: $navy;
+    border-color: $navy;
+    color: $white;
+
+    svg { transform: translateX(4px); }
+  }
+
+  // -------- Popular tier CTA (dark card, so button flips light) --------
+  &--outline {
+    border-color: rgba(255, 255, 255, 0.25);
+    background: transparent;
+    color: $white;
+
+    &:hover {
+      background: linear-gradient(135deg, $orange, $orange-dark);
+      border-color: transparent;
+      color: $white;
+    }
+  }
+}
+
+// -------- Most Popular treatment --------
+// Add [class.vehicle-card--popular]="vehicle.popular" on the
+// <article> in student.html to apply this to the whole tile,
+// the same way corp-fleet-card--featured works.
+.vehicle-card--popular {
+  background: linear-gradient(165deg, $navy-deep, $navy);
+  border-color: $navy;
+
+  .vehicle-card__specs {
+    .spec__label { color: rgba(255, 255, 255, 0.55); }
+    .spec__value { color: $white; }
+
+    .spec__icon {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffb27a;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vehicle-card,
+  .vehicle-card__media,
+  .vehicle-card__cta,
+  .vehicle-card__cta svg {
+    transition: none;
+  }
+}
+
+
+
+
+// =========================================================
+// Student Travel Solutions
+// Structural device: a sticky intro rail beside a list of
+// hoverable rows — a menu/index pattern, not another card
+// grid, so this section reads distinctly from Vehicle Options.
+// =========================================================
+
+$white: #ffffff;
+$ink: #0b1526;
+$navy: #14304f;
+$steel: #64748b;
+$orange: #f97316;
+$orange-dark: #ea580c;
+$line: rgba(15, 23, 42, 0.09);
+$tint: #f5f8fc;
+$font-display: 'Space Grotesk', 'Inter', sans-serif;
+$font-body: 'Inter', sans-serif;
+
+.travel-solutions {
+  background: $white;
+  padding: 6rem 1.5rem 2.5rem;
+}
+
+.travel-solutions__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 3.5rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+// -------- Intro rail --------
+.travel-solutions__intro {
+  align-self: start;
+  position: sticky;
+  top: 100px;
+
+  @media (max-width: 900px) {
+    position: static;
+    text-align: left;
+  }
+}
+
+.travel-solutions__eyebrow {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  color: $orange;
+  font-family: $font-body;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.travel-solutions__title {
+  margin: 0 0 1rem;
+  color: $ink;
+  font-family: $font-display;
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+.travel-solutions__subtitle {
+  margin: 0 0 1.75rem;
+  color: $steel;
+  font-family: $font-body;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.travel-solutions__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.4rem;
+  border: 1.5px solid $navy;
+  border-radius: 999px;
+  background: $white;
+  color: $navy;
+  font-family: $font-body;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 8px 18px rgba(20, 48, 79, 0.1);
+  transition: background 0.25s ease, transform 0.25s ease;
+
+  svg {
+    flex: 0 0 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 0.25s ease;
+  }
+
+  &:hover {
+    background: $orange;
+    border-color: $orange;
+    color: $white;
+    transform: translateY(-2px);
+  }
+  &:hover svg { transform: translateX(3px); }
+}
+
+// -------- Solution rows --------
+.travel-solutions__list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1.5px solid $line;
+}
+
+.solution-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 20px;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.6rem 1.25rem;
+  border-bottom: 1.5px solid $line;
+  text-decoration: none;
+  transition: background 0.3s ease, padding 0.3s ease;
+
+  &:hover {
+    background: $white;
+    padding-inline: 1.75rem 1.5rem;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
+    border-radius: 14px;
+  }
+
+  &:hover .solution-row__icon {
+    background: $navy;
+    color: $white;
+  }
+
+  &:hover .solution-row__title {
+    color: $orange-dark;
+  }
+
+  &:hover .solution-row__arrow {
+    background: $orange;
+    color: $white;
+    transform: translateX(2px);
+  }
+
+  @media (max-width: 560px) {
+    grid-template-columns: 46px 1fr;
+
+    &__arrow { display: none; }
+  }
+}
+
+.solution-row__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: $white;
+  border: 1.5px solid $line;
+  color: $navy;
+  transition: background 0.3s ease, color 0.3s ease;
+
+  svg { width: 26px; height: 26px; }
+
+  @media (max-width: 560px) {
+    width: 46px;
+    height: 46px;
+    svg { width: 22px; height: 22px; }
+  }
+}
+
+.solution-row__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.solution-row__title {
+  color: $ink;
+  font-family: $font-display;
+  font-size: 1.08rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.solution-row__description {
+  color: $steel;
+  font-family: $font-body;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.solution-row__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $tint;
+  color: $navy;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+
+  svg { width: 16px; height: 16px; }
+}
+
+// =========================================================
+// STUDENT RENTAL PACKAGES
+// =========================================================
+
+.pkg-section {
+  padding: 2.5rem 1.5rem 6rem;
+  background: $white;
+}
+
+.pkg-section__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pkg-section__header {
+  max-width: 640px;
+  margin: 0 0 3rem;
+  text-align: left;
+}
+
+.pkg-section__eyebrow {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  color: $orange;
+  font-family: $font-body;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.pkg-section__title {
+  margin: 0 0 0.85rem;
+  color: $ink;
+  font-family: $font-display;
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.18;
+}
+
+.pkg-section__subtitle {
+  margin: 0;
+  color: $steel;
+  font-family: $font-body;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.pkg-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.pkg-ticket {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: $white;
+  border: 1px solid $line;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.07);
+}
+
+.pkg-ticket__identity,
+.pkg-ticket__includes {
+  padding: 1.5rem;
+}
+
+.pkg-ticket__identity {
+  flex: 1;
+}
+
+.pkg-ticket__tag,
+.pkg-ticket__includes-label {
+  display: block;
+  color: $orange;
+  font-family: $font-body;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pkg-ticket__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 1.25rem 0 1rem;
+  border-radius: 13px;
+  background: $tint;
+  color: $navy;
+  font-size: 1.2rem;
+}
+
+.pkg-ticket__title {
+  margin: 0 0 0.65rem;
+  color: $ink;
+  font-family: $font-display;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.pkg-ticket__description {
+  margin: 0;
+  color: $steel;
+  font-family: $font-body;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.pkg-ticket__perforation {
+  border-top: 1px dashed rgba(15, 23, 42, 0.18);
+}
+
+.pkg-ticket__includes-label {
+  margin-bottom: 0.85rem;
+  color: $navy;
+}
+
+.pkg-ticket__list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0 0 1.35rem;
+  padding: 0;
+  list-style: none;
+  color: $steel;
+  font-family: $font-body;
+  font-size: 0.88rem;
+}
+
+.pkg-ticket__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.pkg-ticket__check {
+  flex: 0 0 auto;
+  color: $orange;
+}
+
+.pkg-ticket__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid $navy;
+  border-radius: 10px;
+  background: $navy;
+  color: $white;
+  font-family: $font-body;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+
+  i { font-size: 0.95rem; }
+
+  &:hover {
+    border-color: $orange;
+    background: $orange;
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 900px) {
+  .pkg-list {
+    grid-template-columns: 1fr;
+  }
+
+  .pkg-ticket {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pkg-ticket__perforation {
+    border-top: 0;
+    border-left: 1px dashed rgba(15, 23, 42, 0.18);
+  }
+}
+
+@media (max-width: 560px) {
+  .travel-solutions {
+    padding-bottom: 2rem;
+  }
+
+  .pkg-section {
+    padding: 2rem 1.25rem 4.5rem;
+  }
+
+  .pkg-section__header {
+    margin-bottom: 2.25rem;
+  }
+
+  .pkg-ticket {
+    display: flex;
+  }
+
+  .pkg-ticket__perforation {
+    border-top: 1px dashed rgba(15, 23, 42, 0.18);
+    border-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .solution-row,
+  .solution-row__icon,
+  .solution-row__title,
+  .solution-row__arrow,
+  .travel-solutions__cta,
+  .travel-solutions__cta svg {
+    transition: none;
+  }
+}
+
+
+
+// =========================================================
+// STUDENT TRIP PROCESS
+// Simplified: just four numbered cards in a responsive grid —
+// the road/line/traveling-vehicle treatment has been removed.
+// =========================================================
+
+$white: #ffffff;
+$ink: #0b1526;
+$navy: #14304f;
+$steel: #64748b;
+$orange: #f97316;
+$tint: #f5f8fc;
+$font-display: 'Space Grotesk', 'Inter', sans-serif;
+$font-body: 'Inter', sans-serif;
+
+// -------- Reveal-on-scroll base state --------
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--stagger, 0) * 100ms);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.proc-section {
+  position: relative;
+  padding: 3.5rem 1.5rem 7rem;
+  background: $white;
+}
+
+.proc-section__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// -------- Header --------
+.proc-section__header {
+  max-width: 640px;
+  margin: 0 0 3rem;
+  text-align: left;
+}
+
+.proc-section__eyebrow {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  color: $orange;
+  font-family: $font-body;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.proc-section__title {
+  margin: 0 0 0.85rem;
+  color: $ink;
+  font-family: $font-display;
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+}
+
+.proc-section__subtitle {
+  margin: 0;
+  color: $steel;
+  font-family: $font-body;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+// =========================================================
+// CARD GRID
+// =========================================================
+
+.proc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+}
+
+.proc-card {
+  padding: 2rem 1.5rem 1.9rem;
+  background: $white;
+  border-radius: 20px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  text-align: center;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 26px 52px rgba(15, 23, 42, 0.12);
+  }
+}
+
+.proc-card__number {
+  display: block;
+  margin-bottom: 0.6rem;
+  background: linear-gradient(120deg, $orange, $navy);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: $font-display;
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.proc-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 1rem;
+  border-radius: 13px;
+  background: $tint;
+  color: $navy;
+  font-size: 1.15rem;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.proc-card:hover .proc-card__icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.proc-card h3 {
+  margin: 0 0 0.5rem;
+  color: $ink;
+  font-family: $font-display;
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.proc-card p {
+  margin: 0;
+  color: $steel;
+  font-family: $font-body;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+// =========================================================
+// RESPONSIVE
+// =========================================================
+
+@media (max-width: 900px) {
+  .proc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .proc-section {
+    padding: 2.5rem 1.25rem 5rem;
+  }
+
+  .proc-section__header {
+    margin-bottom: 2.25rem;
+  }
+
+  .proc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+// =========================================================
+// REDUCED MOTION
+// =========================================================
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .proc-card,
+  .proc-card__icon {
+    transition: none;
+  }
+}

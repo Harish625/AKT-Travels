@@ -1,0 +1,94 @@
+<div class="blog-list animate-in">
+  <div class="page-head">
+    <div>
+      <span class="eyebrow">Blog Management</span>
+      <h1>All Blogs</h1>
+      <p>{{ filtered.length }} of {{ allBlogs.length }} stories</p>
+    </div>
+    <a class="btn btn-gold" routerLink="/admin/dashboard/blogs/add">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      Add Blog
+    </a>
+  </div>
+
+  <div class="filter-bar card">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input type="text" placeholder="Search by title, author or tag..." [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()" />
+    </div>
+
+    <select [(ngModel)]="statusFilter" (ngModelChange)="applyFilters()">
+      <option value="all">All statuses</option>
+      <option value="published">Published</option>
+      <option value="draft">Draft</option>
+    </select>
+
+    <select [(ngModel)]="categoryFilter" (ngModelChange)="applyFilters()">
+      <option value="all">All categories</option>
+      <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+    </select>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Blog</th>
+          <th>Category</th>
+          <th>Author</th>
+          <th>Status</th>
+          <th>Updated</th>
+          <th>Views</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let blog of filtered">
+          <td>
+            <div class="blog-cell">
+              <img [src]="blog.coverImage" [alt]="blog.title" />
+              <div>
+                <strong>{{ blog.title }}</strong>
+                <span class="blog-excerpt">{{ blog.excerpt }}</span>
+              </div>
+            </div>
+          </td>
+          <td><span class="chip">{{ blog.category }}</span></td>
+          <td>{{ blog.author }}</td>
+          <td>
+            <button class="badge status-toggle" [ngClass]="blog.status === 'published' ? 'badge-published' : 'badge-draft'" (click)="toggleStatus(blog)">
+              {{ blog.status }}
+            </button>
+          </td>
+          <td>{{ blog.updatedAt | date:'MMM d, y' }}</td>
+          <td>{{ blog.views | number }}</td>
+          <td>
+            <div class="row-actions">
+              <a class="btn btn-ghost btn-sm" [routerLink]="['/admin/dashboard/blogs/edit', blog.id]">Edit</a>
+              <button class="btn btn-danger btn-sm" type="button" (click)="confirmDelete(blog)">Delete</button>
+            </div>
+          </td>
+        </tr>
+
+        <tr *ngIf="!filtered.length">
+          <td colspan="7" class="empty-state">
+            <p>No blogs match your filters.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="blogPendingDelete" (click)="cancelDelete()">
+    <div class="modal card" (click)="$event.stopPropagation()">
+      <h3>Delete "{{ blogPendingDelete.title }}"?</h3>
+      <p>This cannot be undone. The blog will be removed from the admin panel and the public site.</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" type="button" (click)="cancelDelete()">Cancel</button>
+        <button class="btn btn-danger" type="button" (click)="deleteConfirmed()">Delete blog</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" *ngIf="toastMessage">{{ toastMessage }}</div>
+</div>

@@ -1,0 +1,361 @@
+// =========================================================
+// MAIN FOOTER — dark, photo-backed, premium
+// Signature element: an animated gold "route" line across the
+// top, echoing the dashed route border already used on the
+// About section's photo collage — the same road motif now
+// closes the page the way it opened it in the Hero.
+// =========================================================
+
+$footer-bg-deep: #060f1a;
+$footer-accent: #f97316;   // same orange used site-wide
+$footer-gold: #f2c078;     // warm "golden hour" companion to the orange
+$footer-ink: #eef3f8;
+$footer-muted: #9fb0c3;
+$footer-line: rgba(255, 255, 255, 0.1);
+
+@keyframes footerKenBurns {
+  from { transform: scale(1.04) translate3d(0, 0, 0); }
+  to   { transform: scale(1.12) translate3d(-1%, -1%, 0); }
+}
+
+@keyframes footerRouteFlow {
+  to { stroke-dashoffset: -180; }
+}
+
+.main-footer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-top: 2.5rem;
+  color: $footer-ink;
+  background: $footer-bg-deep;
+}
+
+// -------- Background photo + overlay --------
+.main-footer__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('/assets/mfimage1.jpg');
+  background-position: center;
+  background-size: cover;
+  filter: saturate(0.85) brightness(0.5);
+  animation: footerKenBurns 32s ease-in-out infinite alternate;
+}
+
+.main-footer__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(ellipse 60% 45% at 12% 15%, rgba(249, 115, 22, 0.16), transparent 60%),
+    linear-gradient(
+      180deg,
+      rgba(6, 15, 26, 0.35) 0%,
+      rgba(6, 15, 26, 0.82) 40%,
+      $footer-bg-deep 92%
+    );
+}
+
+// -------- Signature route line --------
+.main-footer__route {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 26px;
+}
+
+.main-footer__route-path {
+  animation: footerRouteFlow 6s linear infinite;
+}
+
+// -------- Container / grid --------
+.main-footer__container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.main-footer__grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1.3fr 1.15fr;
+  gap: 2.5rem;
+  padding: 1.5rem 0 2.75rem;
+}
+
+.main-footer__col {
+  min-width: 0;
+}
+
+// -------- Brand column --------
+.main-footer__brand {
+  margin: 0 0 0.9rem;
+  font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+
+  span {
+    color: $footer-gold;
+    font-style: italic;
+  }
+}
+
+.main-footer__about {
+  margin: 0 0 1.4rem;
+  max-width: 34ch;
+  color: $footer-muted;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.main-footer__social {
+  display: flex;
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  color: $footer-ink;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+
+  &:hover,
+  &:focus-visible {
+    background: linear-gradient(135deg, $footer-accent, $footer-gold);
+    color: $footer-bg-deep;
+    transform: translateY(-3px) scale(1.06);
+    box-shadow: 0 10px 20px rgba(249, 115, 22, 0.35);
+  }
+}
+
+// -------- Headings with route-pin marker --------
+.main-footer__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 1.1rem;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.main-footer__pin {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: $footer-gold;
+  box-shadow: 0 0 0 3px rgba(242, 192, 120, 0.22);
+}
+
+// -------- Link lists --------
+.main-footer__links,
+.main-footer__contact {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.main-footer__links--twocol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem 1rem;
+}
+
+.main-footer__link {
+  position: relative;
+  display: inline-block;
+  width: fit-content;
+  color: $footer-muted;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: color 0.25s ease;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 1px;
+    background: $footer-gold;
+    transition: width 0.25s ease;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: #ffffff;
+
+    &::after {
+      width: 100%;
+    }
+  }
+}
+
+// -------- Contact list --------
+.main-footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    color: $footer-muted;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  i {
+    flex: none;
+    margin-top: 0.15rem;
+    color: $footer-accent;
+    font-size: 0.95rem;
+  }
+
+  a {
+    color: $footer-muted;
+    text-decoration: none;
+    transition: color 0.25s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: $footer-gold;
+    }
+  }
+}
+
+// -------- Bottom bar --------
+.main-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  padding: 1.4rem 0 1.75rem;
+  border-top: 1px solid $footer-line;
+}
+
+.main-footer__copyright {
+  margin: 0;
+  color: $footer-muted;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+}
+
+.main-footer__note {
+  margin: 0;
+  color: rgba(159, 176, 195, 0.65);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  font-style: italic;
+}
+
+// -------- Responsive --------
+@media (min-width: 1024px) {
+  .main-footer__bg {
+    // subtle parallax feel on larger screens only
+    background-attachment: fixed;
+  }
+}
+
+@media (max-width: 1024px) {
+  .main-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 2.25rem;
+  }
+
+  .main-footer__col--brand {
+    grid-column: 1 / -1;
+  }
+
+  .main-footer__about {
+    max-width: 52ch;
+  }
+}
+
+@media (max-width: 640px) {
+  .main-footer {
+    padding-top: 1.75rem;
+  }
+
+  .main-footer__grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 1rem 0 2rem;
+    text-align: left;
+  }
+
+  .main-footer__brand {
+    font-size: 1.5rem;
+  }
+
+  .main-footer__links--twocol {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .main-footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+// -------- Reduced motion --------
+@media (prefers-reduced-motion: reduce) {
+  .main-footer__bg {
+    animation: none;
+  }
+
+  .main-footer__route-path {
+    animation: none;
+  }
+}
+
+// =========================================================
+// HOW TO WIRE THIS UP
+// =========================================================
+// 1. Save this file as src/app/.../footer.scss and add it to your
+//    global styles (the same way hero.scss / about-us.scss / reviews.scss
+//    etc. are already included — via angular.json "styles" array or an
+//    index.scss that @use's/@forward's all section partials).
+// 2. footer.ts / footer.html go in a standalone FooterComponent
+//    (selector: app-footer).
+// 3. '/assets/image4.jpg' is reused from your existing Hero slide 4 —
+//    swap it for a dedicated footer photo whenever you have real
+//    photography (a road/route shot works best with the route-line
+//    signature above it).
+// 4. 'Fraunces' is used for the brand wordmark only. If it isn't already
+//    loaded, add to index.html <head>:
+//    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+//    It falls back cleanly to Georgia if you skip this.

@@ -1,0 +1,98 @@
+<div class="dash animate-in">
+  <div class="dash-head">
+    <div>
+      <span class="eyebrow">Overview</span>
+      <h1>Good to see you, Meera</h1>
+      <p>Here's how the AKT Travels journal is doing today, {{ today | date:'EEEE, MMM d' }}.</p>
+    </div>
+    <a class="btn btn-gold" routerLink="/admin/dashboard/blogs/add">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      New Blog
+    </a>
+  </div>
+
+  <div class="stat-grid">
+    <div class="ticket">
+      <div class="ticket-main">
+        <span class="eyebrow">Total Blogs</span>
+        <strong class="ticket-value">{{ stats.total }}</strong>
+        <span class="ticket-sub">across all categories</span>
+      </div>
+      <div class="ticket-stub">
+        <svg viewBox="0 0 24 24" fill="none" width="20" height="20" aria-hidden="true"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H12v16H5.5A1.5 1.5 0 0 1 4 18.5v-13Z" stroke="currentColor" stroke-width="1.6"/><path d="M20 5.5A1.5 1.5 0 0 0 18.5 4H12v16h6.5a1.5 1.5 0 0 0 1.5-1.5v-13Z" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-main">
+        <span class="eyebrow">Published</span>
+        <strong class="ticket-value">{{ stats.published }}</strong>
+        <span class="ticket-sub">live on the site</span>
+      </div>
+      <div class="ticket-stub stub-teal">
+        <svg viewBox="0 0 24 24" fill="none" width="20" height="20" aria-hidden="true"><path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-main">
+        <span class="eyebrow">Drafts</span>
+        <strong class="ticket-value">{{ stats.drafts }}</strong>
+        <span class="ticket-sub">waiting to publish</span>
+      </div>
+      <div class="ticket-stub stub-gold">
+        <svg viewBox="0 0 24 24" fill="none" width="20" height="20" aria-hidden="true"><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+    </div>
+
+    <div class="ticket">
+      <div class="ticket-main">
+        <span class="eyebrow">Total Views</span>
+        <strong class="ticket-value">{{ stats.totalViews | number }}</strong>
+        <span class="ticket-sub">reader visits</span>
+      </div>
+      <div class="ticket-stub stub-coral">
+        <svg viewBox="0 0 24 24" fill="none" width="20" height="20" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.6"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-lower">
+    <div class="card recent-card">
+      <div class="card-head">
+        <h3>Recently Updated</h3>
+        <a routerLink="/admin/dashboard/blogs" class="link-more">View all</a>
+      </div>
+      <ul class="recent-list">
+        <li *ngFor="let blog of recentBlogs">
+          <img [src]="blog.coverImage" [alt]="blog.title" />
+          <div class="recent-meta">
+            <strong>{{ blog.title }}</strong>
+            <span>{{ blog.category }} - Updated {{ blog.updatedAt | date:'MMM d' }}</span>
+          </div>
+          <span class="badge" [ngClass]="blog.status === 'published' ? 'badge-published' : 'badge-draft'">
+            {{ blog.status }}
+          </span>
+          <a class="btn btn-ghost btn-sm" [routerLink]="['/admin/dashboard/blogs/edit', blog.id]">Edit</a>
+        </li>
+        <li *ngIf="!recentBlogs.length" class="empty-row">No blogs yet. Create your first story.</li>
+      </ul>
+    </div>
+
+    <div class="card quick-card">
+      <h3>Quick actions</h3>
+      <a class="quick-link" routerLink="/admin/dashboard/blogs/add">
+        <span class="quick-ico">+</span>
+        <div><strong>Write a new blog</strong><span>Start a fresh travel story</span></div>
+      </a>
+      <a class="quick-link" routerLink="/admin/dashboard/blogs">
+        <span class="quick-ico">=</span>
+        <div><strong>Manage all blogs</strong><span>Edit, publish or archive</span></div>
+      </a>
+      <a class="quick-link" routerLink="/">
+        <span class="quick-ico">></span>
+        <div><strong>Preview live site</strong><span>See the public journal</span></div>
+      </a>
+    </div>
+  </div>
+</div>

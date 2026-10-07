@@ -1,0 +1,153 @@
+<section class="vehicle-details">
+  <div class="vehicle-details__container">
+
+    <!-- Back button -->
+    <button type="button" class="back-btn" (click)="goBack()">
+      <i class="bi bi-arrow-left" aria-hidden="true"></i>
+      Back to Vehicles
+    </button>
+
+    <!-- Vehicle selector -->
+    <div class="vehicle-selector">
+      <div class="vehicle-selector__scroll">
+        <button
+          type="button"
+          class="vehicle-pill"
+          *ngFor="let vehicle of vehicles; trackBy: trackByVehicleId"
+          [class.vehicle-pill--active]="vehicle.id === selectedVehicle.id"
+          (click)="selectVehicle(vehicle)"
+        >
+          {{ vehicle.shortLabel }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Main image + gallery -->
+    <div class="vehicle-media">
+      <div class="vehicle-media__main">
+        <img [src]="selectedVehicle.image" [alt]="selectedVehicle.name" />
+      </div>
+
+      <div class="vehicle-media__gallery" *ngIf="selectedVehicle.gallery?.length">
+        <div class="vehicle-media__thumb" *ngFor="let img of selectedVehicle.gallery">
+          <img [src]="img" [alt]="selectedVehicle.name + ' additional view'" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Vehicle header -->
+    <div class="vehicle-header">
+      <span class="vehicle-header__type">{{ selectedVehicle.type }}</span>
+      <h1 class="vehicle-header__name">{{ selectedVehicle.name }}</h1>
+      <p class="vehicle-header__description">{{ selectedVehicle.description }}</p>
+    </div>
+
+    <!-- Quick specifications -->
+    <div class="quick-specs">
+      <div class="quick-spec">
+        <span class="quick-spec__icon"><i class="bi bi-people-fill" aria-hidden="true"></i></span>
+        <span class="quick-spec__label">Seating Capacity</span>
+        <span class="quick-spec__value">{{ selectedVehicle.seats }}</span>
+      </div>
+      <div class="quick-spec">
+        <span class="quick-spec__icon"><i class="bi bi-snow" aria-hidden="true"></i></span>
+        <span class="quick-spec__label">AC</span>
+        <span class="quick-spec__value">{{ selectedVehicle.ac }}</span>
+      </div>
+      <div class="quick-spec">
+        <span class="quick-spec__icon"><i class="bi bi-bag-fill" aria-hidden="true"></i></span>
+        <span class="quick-spec__label">Luggage</span>
+        <span class="quick-spec__value">{{ selectedVehicle.luggage }}</span>
+      </div>
+      <div class="quick-spec">
+        <span class="quick-spec__icon"><i class="bi bi-car-front-fill" aria-hidden="true"></i></span>
+        <span class="quick-spec__label">Vehicle Type</span>
+        <span class="quick-spec__value">{{ selectedVehicle.type }}</span>
+      </div>
+      <div class="quick-spec">
+        <span class="quick-spec__icon"><i class="bi bi-fuel-pump-fill" aria-hidden="true"></i></span>
+        <span class="quick-spec__label">Fuel Type</span>
+        <span class="quick-spec__value">{{ selectedVehicle.fuelType }}</span>
+      </div>
+      <div class="quick-spec">
+        <span class="quick-spec__icon"><i class="bi bi-gear-fill" aria-hidden="true"></i></span>
+        <span class="quick-spec__label">Transmission</span>
+        <span class="quick-spec__value">{{ selectedVehicle.transmission }}</span>
+      </div>
+      <div class="quick-spec">
+        <span class="quick-spec__icon"><i class="bi bi-person-badge-fill" aria-hidden="true"></i></span>
+        <span class="quick-spec__label">Driver</span>
+        <span class="quick-spec__value">{{ selectedVehicle.driver }}</span>
+      </div>
+    </div>
+
+    <!-- Vehicle overview -->
+    <div class="details-block">
+      <h2 class="details-block__title">Vehicle Overview</h2>
+      <p class="details-block__text">{{ selectedVehicle.overview }}</p>
+    </div>
+
+    <!-- Key features -->
+    <div class="details-block">
+      <h2 class="details-block__title">Key Features</h2>
+      <div class="feature-grid">
+        <div class="feature-item" *ngFor="let feature of selectedVehicle.features">
+          <i class="bi bi-check-circle-fill" aria-hidden="true"></i>
+          <span>{{ feature }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Travel information -->
+    <div class="details-block">
+      <h2 class="details-block__title">Travel Information</h2>
+      <div class="info-list">
+        <div class="info-list__row">
+          <span class="info-list__label">Vehicle Type</span>
+          <span class="info-list__value">{{ selectedVehicle.type }}</span>
+        </div>
+        <div class="info-list__row">
+          <span class="info-list__label">Capacity</span>
+          <span class="info-list__value">{{ selectedVehicle.seats }}</span>
+        </div>
+        <div class="info-list__row">
+          <span class="info-list__label">Luggage</span>
+          <span class="info-list__value">{{ selectedVehicle.luggage }}</span>
+        </div>
+        <div class="info-list__row">
+          <span class="info-list__label">AC</span>
+          <span class="info-list__value">{{ selectedVehicle.ac }}</span>
+        </div>
+        <div class="info-list__row">
+          <span class="info-list__label">Driver</span>
+          <span class="info-list__value">{{ selectedVehicle.driver }}</span>
+        </div>
+        <div class="info-list__row">
+          <span class="info-list__label">Minimum Booking</span>
+          <span class="info-list__value">{{ selectedVehicle.minimumBooking }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Best suited for -->
+    <div class="details-block">
+      <h2 class="details-block__title">Best Suited For</h2>
+      <div class="suitable-grid">
+        <div class="suitable-item" *ngFor="let purpose of selectedVehicle.suitableFor">
+          <i class="bi bi-geo-alt-fill" aria-hidden="true"></i>
+          <span>{{ purpose }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Important information -->
+    <div class="important-note">
+      <i class="bi bi-info-circle" aria-hidden="true"></i>
+      <p>
+        Fuel, toll, parking, permit and other applicable travel charges may vary depending on the
+        selected route and trip requirements.
+      </p>
+    </div>
+
+  </div>
+</section>

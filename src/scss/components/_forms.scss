@@ -1,0 +1,38 @@
+// =========================================================
+// COMPONENTS / FORMS
+// =========================================================
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.form-group {
+  margin-bottom: v.$space-5;
+}
+
+.form-row {
+  display: grid;
+  gap: v.$space-4;
+  grid-template-columns: 1fr;
+
+  @include m.respond-to(md) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-error {
+  color: v.$color-danger;
+  font-size: v.$font-size-xs;
+  margin-top: v.$space-1;
+}
+
+.form-hint {
+  color: v.$color-text-muted;
+  font-size: v.$font-size-xs;
+  margin-top: v.$space-1;
+}
+
+// Card-style form wrapper (e.g. "Get Free Quote" modal)
+.form-card {
+  @include m.card(v.$space-6);
+  max-width: 480px;
+  margin-inline: auto;
+}

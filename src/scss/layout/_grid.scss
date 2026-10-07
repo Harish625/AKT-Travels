@@ -1,0 +1,59 @@
+// =========================================================
+// LAYOUT / GRID
+// Mobile-first responsive grid utilities: .grid + .grid-cols-*
+// =========================================================
+@use '../abstracts/variables' as v;
+@use '../abstracts/mixins' as m;
+
+.grid {
+  display: grid;
+  gap: v.$space-5;
+  grid-template-columns: 1fr; // mobile: always single column
+
+  &--tight {
+    gap: v.$space-3;
+  }
+  &--loose {
+    gap: v.$space-7;
+  }
+}
+
+// Column counts apply from tablet up so mobile always stacks
+.grid-cols-2 {
+  @include m.respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.grid-cols-3 {
+  @include m.respond-to(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include m.respond-to(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.grid-cols-4 {
+  @include m.respond-to(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include m.respond-to(lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+// Simple flex row helper for e.g. nav items, stat groups
+.flex-row {
+  @include m.flex(row, flex-start, center, v.$space-4);
+  flex-wrap: wrap;
+}
+
+.flex-between {
+  @include m.flex(row, space-between, center, v.$space-4);
+  flex-wrap: wrap;
+}
+
+.flex-center {
+  @include m.flex-center;
+}

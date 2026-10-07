@@ -1,0 +1,102 @@
+// =========================================================
+// MAIN.SCSS
+// Single global stylesheet entry point for the whole website.
+// Import ONLY this file in angular.json ("styles") or index.html.
+// Never import abstracts/* directly anywhere else except inside
+// component .scss files that need variables/mixins (@use them there).
+// =========================================================
+// ⚠️ Sass gotcha: you MUST interpolate — without #{} the SCSS variable
+
+// 1. Abstracts (variables, mixins, functions - no CSS output)
+
+@use 'bootstrap/scss/bootstrap';
+
+@use 'abstracts/variables';
+@use 'abstracts/mixins';
+@use 'abstracts/functions';
+@use 'abstracts/animations';
+
+// 2. Base (reset, typography, base element styles)
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/base';
+
+// 3. Layout (container, grid, section)
+@use 'layout/container';
+@use 'layout/grid';
+
+// 4. Components (buttons, cards, forms - shared across all pages)
+
+
+
+@use 'components/topbar';
+@use 'components/navbar';
+@use 'components/buttons';
+@use 'components/cards';
+@use 'components/forms';
+@use 'components/home';
+@use 'components/contact';
+@use 'components/details';
+@use 'components/login'; 
+@use 'components/admin';
+@use 'components/dashboard';
+@use 'components/blog-list';
+@use 'components/add-blog';
+@use 'components/top-bar.scss';
+@use 'components/sidebar';
+@use 'components/footer';
+@use 'components/mainfooter';
+@use 'components/add-review';
+@use 'components/corporate.scss';
+@use 'components/student';
+@use 'components/tour-package';
+@use 'components/packages';
+
+// 5. Utilities (helper classes - loaded last so they can override)
+@use 'utilities/utilities';
+
+
+
+
+// =========================================================
+// GLOBAL BASE
+// =========================================================
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  margin: 0;
+
+  padding: 0;
+
+  font-family:
+    'Inter',
+    'Segoe UI',
+    sans-serif;
+
+  color:
+    #1A1A1A;
+
+  background:
+    #FFFFFF;
+
+  -webkit-font-smoothing: antialiased;
+
+  text-rendering: optimizeLegibility;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
